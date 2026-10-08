@@ -101,3 +101,9 @@ Always read recent food history before recommending where or what to eat.
 | Garmin / Peloton | only on the athlete's explicit request in this conversation, then read back (references/garmin-writes.md) | same |
 
 Every coach-state write is one git commit; tell the athlete what landed (the SHA).
+
+**Record agreed changes immediately.** When the athlete agrees to a change (indoor instead
+of outdoor, a swapped session, a moved day), write it in the same turn: `record_override`
+or `add_note` from chat, the week file's day entry from Claude Code. Don't leave "should I
+record this?" open: a change that lives only in a conversation is invisible to every later
+session, which will then report the stale plan.
