@@ -26,8 +26,12 @@ before trusting a metric you haven't used recently. Summary of the traps that re
   `seconds_since_pedaling_start`.
 
 ## Calories
-- Peloton-device calories (~1.8–2×) and Garmin strength/stretch calories (~1.5–2×) are
-  inflated: never use them for energy balance or "eating back". Run calories are credible.
+- Inflated (never use for energy balance or "eating back"): calories **recorded by a
+  Peloton device** (Peloton's own figure for a Bike or Tread session, ~1.8–2×) and Garmin
+  **strength/stretch** calories (~1.5–2×).
+- Credible: **run calories recorded by the watch**, including runs done on the Tread (the
+  watch's figure, not Peloton's). It's the recording device that matters, not where the
+  run happened.
 
 ## Weight and body composition
 - Source of truth: Garmin Index scale via Garmin Connect. Never Apple Health.
