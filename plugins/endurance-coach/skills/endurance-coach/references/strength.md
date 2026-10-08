@@ -42,6 +42,15 @@ decisions: read them with `search_positions("strength")`. Equipment is in coach-
 
 ## Check-in (after every strength session)
 
+**First, if the session was on the Peloton Guide** (Peloton workout `device_type_display_name`
+"Guide", device type `t21n8m2`), read `strength_movements(workout_id)`. When
+`movement_tracker_data` is present it holds the camera's rep counts and the movements
+actually performed: compare them with the class structure and the prescription (skipped
+movements, reps dropping off across sets), and only ask what the camera can't see (weights
+used, how it felt, pain). When it's absent, the class wasn't tracked (Movement Tracker runs
+only on classes built for it, and a 2023 Core for Runners session on 2026-10-05 had none):
+say so and ask everything below.
+
 Ask, conversationally, one at a time if needed:
 1. Did you use the prescribed weights, or adapt (heavier, lighter, bodyweight, fewer reps,
    skipped a movement)?

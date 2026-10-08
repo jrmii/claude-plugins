@@ -10,6 +10,10 @@ before trusting a metric you haven't used recently. Summary of the traps that re
 - Peloton class zone/target figures (`why_scale: peloton_class_targets`) are prescriptions
   on the Peloton scale, not measurements, and never comparable to Garmin zone time.
 
+## Peloton device types (`workouts_list` / workout detail)
+- `home_tread` = Tread, `home_bike_v1` = Bike (gen 1), `t21n8m2` = Guide (camera; strength,
+  display name "Guide"), `garmin_connect` = synced in from Garmin (not a Peloton record).
+
 ## Garmin vs Peloton for the same session
 - HR: the same strap broadcasts to both; Garmin is canonical.
 - Tread: belt speed and incline exist only in Peloton (the watch estimates pace from

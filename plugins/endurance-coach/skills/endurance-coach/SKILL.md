@@ -58,11 +58,12 @@ A plan entry may carry `gate:` (condition) and `fallback:`.
 
 - Pull the activity (`get_activities_by_date` for the date, then `get_activity` for
   detail: device, training effect, load, power, laps). This is **Garmin's record only**.
-- **Sessions on Peloton equipment (Tread, Bike): also pull the Peloton workout.**
+- **Sessions on Peloton equipment (Tread, Bike, Guide): also pull the Peloton workout.**
   `workouts_list` (match the one starting within ~150 s of the Garmin activity), then
   `workouts_performance(workout_id, every_n=..., select=...)` with a narrow `select`.
   Peloton alone has belt speed/pace and incline over time (Tread) and cadence, resistance
-  and output (Bike); Garmin alone has laps (rep boundaries), running dynamics, training
+  and output (Bike), and for Guide strength sessions the camera's rep counts and the
+  movements performed (references/strength.md); Garmin alone has laps (rep boundaries), running dynamics, training
   effect/load and the athlete's feel/RPE. Use both: e.g. speed vs HR drift per rep needs
   Peloton speed over Garmin lap times. Which numbers come from which source: see
   references/data.md.
