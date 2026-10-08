@@ -22,7 +22,13 @@ claude plugin install endurance-coach@jrmii-plugins
 Then turn on updates: `/plugin` → Marketplaces → `jrmii-plugins` → Enable auto-update
 (or run `claude plugin update endurance-coach@jrmii-plugins` after changes).
 
-Plugins here don't set `version`, so installs track commits on `main`.
+Plugins here don't set `version`, so installs track commits on `main`. Claude Code shows the
+commit SHA as the version; claude.ai numbers its own installs (v1, v2, ...).
+
+**After every change:** Claude Code picks it up only with auto-update on, or
+`claude plugin update endurance-coach@jrmii-plugins`. claude.ai: plugin settings → check
+for update → Update (verified 2026-10-07: d28f8a1 arrived as v2). Whether claude.ai checks
+on its own is not yet known; until it does, force the check after important changes.
 
 ## Develop
 
