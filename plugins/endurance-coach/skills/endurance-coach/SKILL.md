@@ -44,6 +44,9 @@ no athlete data. Never answer from memory what a tool can tell you.
    goal and what remains (show the subtraction), and whether that fits the phase target.
    A low `item_count` means a partly logged day: say so rather than call it a deficit.
    Protein target comes from coach-state (positions/constraints), not Garmin's macro split.
+   Garmin's `calorieGoal` is set by us to implement the coach-state target; its
+   `weightChangeType` / `weightChangeRate` / `targetWeightGoal` are **stale** (the API can't
+   change them; data-defects.md). Never derive the deficit from them.
 4. `record` in `earlier_this_week` describes the **repo**, not reality. Actuals are written
    at the weekly reconcile, so `none`/`notes_only` mid-week is normal. Before saying
    anything about an earlier day, read Garmin activities for that date.

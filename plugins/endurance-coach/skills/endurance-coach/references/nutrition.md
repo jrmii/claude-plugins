@@ -1,5 +1,9 @@
 # Nutrition: targets, meal logging, recommendations
 
+Garmin's `calorieGoal` is written by us to match the coach-state target. The Garmin plan's
+`weightChangeType`, `weightChangeRate` and `targetWeightGoal` are stale metadata (the API
+can't change them): never compute a deficit from them.
+
 Targets (calories, protein, deficit phases) are decisions in coach-state: read
 `constraints.yaml` (current deficit phase) and `search_positions("nutrition")` /
 `search_positions("protein")`. The Garmin nutrition plan's own macro split is a single
