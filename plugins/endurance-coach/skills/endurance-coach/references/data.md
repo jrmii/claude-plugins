@@ -60,9 +60,9 @@ before trusting a metric you haven't used recently. Summary of the traps that re
 - Completed scheduled workouts disappear from `get_scheduled_workouts`.
 
 ## Units and time
-- Plan distances in the athlete's unit (`athlete.yaml` → `preferences.distance_unit`);
-  races keep conventional names (5K, Half), never "a 3.1 mi race". Quote observed data in
-  its native unit, labelled, with the conversion shown.
+- Everything shown to the athlete is in their unit (`athlete.yaml` →
+  `preferences.distance_unit`), including Garmin/Peloton data (convert metres/km; show the
+  conversion once). Races keep conventional names (5K, Half), never "a 3.1 mi race".
 - `date:` = athlete-local civil date; instants = ISO 8601 with the local offset; compare
   instants as instants.
 

@@ -34,12 +34,22 @@ no athlete data. Never answer from memory what a tool can tell you.
 1. `get_today` (coach-state). Read: `plan` for today; `garmin_workouts` and `peloton`
    picks; `gates`; `notes`; `earlier_this_week` (each earlier planned day with its `plan`,
    `scheduled` items and `record`); `active_constraints`; `pending_questions`.
-2. `record` in `earlier_this_week` describes the **repo**, not reality. Actuals are written
+2. **Units:** read `athlete.yaml` → `preferences` once per conversation
+   (`get_file("athlete.yaml")`). Show *everything* in `distance_unit`, including distances
+   read from Garmin or Peloton (convert metres/km; show the conversion once); races keep
+   conventional names (5K, Half).
+3. **Nutrition, when a nutrition phase is active** (a deficit or target in
+   `active_constraints`): Garmin `get_nutrition_summary_between_dates(today, today)` and
+   `get_nutrition_daily_settings(today)`. Report calories and protein logged so far vs the
+   goal and what remains (show the subtraction), and whether that fits the phase target.
+   A low `item_count` means a partly logged day: say so rather than call it a deficit.
+   Protein target comes from coach-state (positions/constraints), not Garmin's macro split.
+4. `record` in `earlier_this_week` describes the **repo**, not reality. Actuals are written
    at the weekly reconcile, so `none`/`notes_only` mid-week is normal. Before saying
    anything about an earlier day, read Garmin activities for that date.
-3. Notes with `superseded_by` were corrected by a later note: trust the later one.
-4. If `pending_questions` is non-empty, raise the most relevant one (one at a time).
-5. For standing decisions use `search_positions` before restating anything as settled.
+5. Notes with `superseded_by` were corrected by a later note: trust the later one.
+6. If `pending_questions` is non-empty, raise the most relevant one (one at a time).
+7. For standing decisions use `search_positions` before restating anything as settled.
    Positions sourced `athlete`/`agreed` are settled: if live data contradicts one, flag it
    with numbers; don't change or relitigate it.
 
