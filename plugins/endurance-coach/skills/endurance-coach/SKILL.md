@@ -76,6 +76,11 @@ A plan entry may carry `gate:` (condition) and `fallback:`.
   placement rules from positions).
 - Weekly planning (usually in Claude Code with repo access): references/planning.md.
 
+## Connector changes
+
+Peloton's own connector is evolving: at weekly planning and mid-week reviews, check its
+tools against the baseline in references/connectors.md and report any change.
+
 ## Data discipline
 
 Before trusting any metric, check coach-state `data-defects.md` (`get_file`). The
