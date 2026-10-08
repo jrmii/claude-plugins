@@ -1,0 +1,27 @@
+name: validate
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Skill checks (frontmatter, links, size, no personal data)
+        run: python3 scripts/check_skills.py
+      - name: Checker self-tests
+        working-directory: scripts
+        run: python3 -m unittest -v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Claude Code plugin validation
+        run: |
+          npm install -g @anthropic-ai/claude-code
+          claude plugin validate .
+          for p in plugins/*/; do claude plugin validate "$p"; done

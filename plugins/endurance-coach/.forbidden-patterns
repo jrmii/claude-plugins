@@ -1,0 +1,12 @@
+# Personal data must never reach this public plugin; it lives in the private coach-state repo.
+\bJim\b
+Michelle
+\bToni\b
+daedelus
+Hayden
+\bjrmii\b
+fenix
+# Garmin workout / activity ids, Peloton ride / workout ids
+\b17\d{8}\b
+\b24\d{9}\b
+\b[0-9a-f]{32}\b

@@ -1,0 +1,16 @@
+{
+  "name": "endurance-coach",
+  "description": "Endurance coaching method for use with the coach-state, Garmin Connect and Peloton MCP connectors. Procedures only; athlete data lives in the coach-state repo.",
+  "author": {
+    "name": "Jim Martin"
+  },
+  "repository": "https://github.com/jrmii/claude-plugins",
+  "keywords": [
+    "coaching",
+    "running",
+    "cycling",
+    "garmin",
+    "peloton",
+    "strength"
+  ]
+}

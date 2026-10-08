@@ -1,0 +1,12 @@
+{
+  "name": "jrmii-plugins",
+  "description": "Personal Claude plugins",
+  "owner": {"name": "Jim Martin"},
+  "plugins": [
+    {
+      "name": "endurance-coach",
+      "source": "./plugins/endurance-coach",
+      "description": "Endurance coaching method: session start, readiness gates, strength prescription and check-ins, Garmin/Peloton workout procedure, data traps, planning, meals. Works with the coach-state, Garmin Connect and Peloton MCP connectors."
+    }
+  ]
+}
