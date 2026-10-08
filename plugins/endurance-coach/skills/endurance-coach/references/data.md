@@ -10,6 +10,17 @@ before trusting a metric you haven't used recently. Summary of the traps that re
 - Peloton class zone/target figures (`why_scale: peloton_class_targets`) are prescriptions
   on the Peloton scale, not measurements, and never comparable to Garmin zone time.
 
+## Garmin vs Peloton for the same session
+- HR: the same strap broadcasts to both; Garmin is canonical.
+- Tread: belt speed and incline exist only in Peloton (the watch estimates pace from
+  stride and has no grade signal). Belt distance is closer to truth than the stride model;
+  the fenix copy is calibrated to it.
+- Running power: Garmin running power and Peloton Tread output are different scales
+  (as with bike power): never compare or combine them.
+- Peloton HR zones are its own %max model: never use them; use Garmin zones.
+- `workouts_performance` splits are pace-normalised (don't sum them); sample times are
+  `seconds_since_pedaling_start`.
+
 ## Calories
 - Peloton-device calories (~1.8–2×) and Garmin strength/stretch calories (~1.5–2×) are
   inflated: never use them for energy balance or "eating back". Run calories are credible.

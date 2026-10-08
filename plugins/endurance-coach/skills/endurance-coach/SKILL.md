@@ -57,8 +57,17 @@ A plan entry may carry `gate:` (condition) and `fallback:`.
 ## After a session
 
 - Pull the activity (`get_activities_by_date` for the date, then `get_activity` for
-  detail: device, training effect, load, power). Compare against the plan entry quoting
-  its values; note within/over cap from the recorded max/avg HR.
+  detail: device, training effect, load, power, laps). This is **Garmin's record only**.
+- **Sessions on Peloton equipment (Tread, Bike): also pull the Peloton workout.**
+  `workouts_list` (match the one starting within ~150 s of the Garmin activity), then
+  `workouts_performance(workout_id, every_n=..., select=...)` with a narrow `select`.
+  Peloton alone has belt speed/pace and incline over time (Tread) and cadence, resistance
+  and output (Bike); Garmin alone has laps (rep boundaries), running dynamics, training
+  effect/load and the athlete's feel/RPE. Use both: e.g. speed vs HR drift per rep needs
+  Peloton speed over Garmin lap times. Which numbers come from which source: see
+  references/data.md.
+- Compare against the plan entry quoting its values; note within/over cap from the
+  recorded max/avg HR.
 - **Strength sessions: always run the check-in** (references/strength.md) and record the
   answers with `add_note`.
 - Divergence from the plan without a known reason: ask why (one question), then
