@@ -1,6 +1,9 @@
 # Nutrition: targets, meal logging, recommendations
 
-Garmin's `calorieGoal` is written by us to match the coach-state target. The Garmin plan's
+The day's calorie target is Garmin's activity-adjusted goal: `get_nutrition_daily_food_log`
+→ `dailyNutritionGoals.adjustedCalories` (athlete decision, positions.md). Its base
+`calorieGoal` is written by us to match the coach-state phase. Garmin also scales protein
+(`adjustedProtein`); ignore that and use the coach-state protein target. The Garmin plan's
 `weightChangeType`, `weightChangeRate` and `targetWeightGoal` are stale metadata (the API
 can't change them): never compute a deficit from them.
 
