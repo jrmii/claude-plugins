@@ -14,7 +14,7 @@ before trusting a metric you haven't used recently. Summary of the traps that re
 - HR: the same strap broadcasts to both; Garmin is canonical.
 - Tread: belt speed and incline exist only in Peloton (the watch estimates pace from
   stride and has no grade signal). Belt distance is closer to truth than the stride model;
-  the fenix copy is calibrated to it.
+  the watch copy is calibrated to it.
 - Running power: Garmin running power and Peloton Tread output are different scales
   (as with bike power): never compare or combine them.
 - Peloton HR zones are its own %max model: never use them; use Garmin zones.
