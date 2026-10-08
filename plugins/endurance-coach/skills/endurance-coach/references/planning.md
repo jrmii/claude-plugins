@@ -4,6 +4,7 @@ Usually done in Claude Code with the coach-state repo checked out; chat can prop
 record notes/overrides but doesn't edit plan structure.
 
 ## Before planning week N+1
+0. Connector check (references/connectors.md): has the Peloton first-party surface changed?
 1. **Reconcile week N first** into its `actuals:` (Garmin activities vs plan; the engine
    does this once deployed). Unexplained divergence → a pending question.
 2. Read: `season.yaml` (this week's target long run, weekly volume, phase intent),
@@ -34,6 +35,7 @@ record notes/overrides but doesn't edit plan structure.
 - Check the alternative day before proposing a swap; cite the forecast issue time.
 
 ## Mid-week review ("should I continue as planned?")
+0. Connector check (references/connectors.md): has the Peloton first-party surface changed?
 1. `get_today`; the remaining days' plan entries.
 2. Garmin: HRV trend (2 weeks), sleep (1 week), readiness today, training status,
    activities since Monday (and last week for context); `get_activity` for key sessions
