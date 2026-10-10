@@ -7,6 +7,10 @@ record notes/overrides but doesn't edit plan structure.
 0. Connector check (references/connectors.md): has the Peloton first-party surface changed?
 1. **Reconcile week N first** into its `actuals:` (Garmin activities vs plan; the engine
    does this once deployed). Unexplained divergence → a pending question.
+   Then `search_positions("review")`: for any position that names data to collect and a
+   review date, add that week's figures as a note (show the arithmetic); on or after the
+   review date, raise the review with the athlete.
+   Close constraints and open items the week's decisions ended (e.g. a nutrition phase).
 2. Read: `season.yaml` (this week's target long run, weekly volume, phase intent),
    `constraints.yaml` (travel, events, lodging, family), `races.yaml`, positions
    (strength placement, long-run day, PZE ride, HR caps), `questions.yaml`.
