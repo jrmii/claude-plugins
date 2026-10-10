@@ -47,11 +47,16 @@ before trusting a metric you haven't used recently. Summary of the traps that re
 - Peloton stretch classes arrive as `strength_training` (since Aug 2026; `mobility`
   before): don't count ≤15-min "Stretch" entries as strength sessions.
 - The watch truncates activity names created from workouts at 32 characters.
+- Treadmill runs: "Save & Calibrate" on the watch corrects the total distance only; lap
+  distances and paces stay the uncalibrated accelerometer estimate. Use Peloton belt data
+  for pace within a Tread run.
 - Late uploads happen: a day isn't complete until the device's last upload is after it.
 
 ## Readiness inputs
 - Wake readiness = the `AFTER_WAKEUP_RESET` entry of `get_training_readiness`.
-- HRV: single nights are noisy; use status + weekly average (`get_hrv_trend`).
+- HRV: single nights are noisy; use status + weekly average (`get_hrv_trend`). The number in
+  a feedback code (`HRV_BALANCED_8`) is a message code, not a count of nights: count the
+  streak from the daily statuses.
 - A low sleep score with a known logistics cause (late pickup, travel) is not a recovery
   signal: check notes.
 

@@ -14,8 +14,10 @@ scalar on a fixed ratio; use the coach-state protein target, not Garmin's.
 
 ## Logging a meal
 1. Identify each item and portion; estimate macros explicitly (show per-item numbers).
-2. Prefer existing custom foods (`get_custom_foods`) so repeats stay consistent; restaurant
-   items are custom foods with `brandName` = restaurant.
+2. Before creating anything, look in **both** places: the athlete's custom foods
+   (`get_custom_foods`) and the Garmin catalog (`search_foods`, which includes FatSecret
+   items he already logs, e.g. sports-nutrition products). Reuse what exists so repeats stay
+   consistent; restaurant items are custom foods with `brandName` = restaurant.
 3. Log with intentional timestamps: Garmin buckets meals by time window (breakfast, lunch,
    dinner, snacks), so pick a time inside the intended meal's window.
 4. Plain characters in names (`&`, not `&amp;`); pass every field explicitly on updates.
