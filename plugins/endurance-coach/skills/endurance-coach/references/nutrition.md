@@ -18,6 +18,10 @@ scalar on a fixed ratio; use the coach-state protein target, not Garmin's.
    (`get_custom_foods`) and the Garmin catalog (`search_foods`, which includes FatSecret
    items he already logs, e.g. sports-nutrition products). Reuse what exists so repeats stay
    consistent; restaurant items are custom foods with `brandName` = restaurant.
+   Athletes use nicknames ("PF60") that don't match catalog names ("PF Carb & Electrolyte
+   Drink Mix"): if both searches miss, check the last 1–2 weeks of
+   `get_nutrition_daily_food_log` for the item already in use, and coach-state notes for a
+   recorded label, before concluding it doesn't exist.
 3. Log with intentional timestamps: Garmin buckets meals by time window (breakfast, lunch,
    dinner, snacks), so pick a time inside the intended meal's window.
 4. Plain characters in names (`&`, not `&amp;`); pass every field explicitly on updates.
