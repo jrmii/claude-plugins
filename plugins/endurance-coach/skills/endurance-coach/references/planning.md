@@ -11,6 +11,13 @@ record notes/overrides but doesn't edit plan structure.
    review date, add that week's figures as a note (show the arithmetic); on or after the
    review date, raise the review with the athlete.
    Close constraints and open items the week's decisions ended (e.g. a nutrition phase).
+   **Log Claude's errors:** for every claim Claude (chat or Claude Code) made this week and
+   later withdrew, add a row to `retractions.md`: next number, date of the claim, the claim
+   (with its note SHA), why it was withdrawn, who caught it (athlete, chat self-correction,
+   reconcile, validation), and the correcting note/commit. Find them in the week's notes:
+   `supersedes_note`, "CORRECTION", "withdrawn", "was wrong", and claims the athlete
+   corrected in chat. Not every correction counts: a changed plan, or a fact the athlete
+   updated, isn't a retraction. If the fix shipped (skill, MCP), cite that commit too.
 2. Read: `season.yaml` (this week's target long run, weekly volume, phase intent),
    `constraints.yaml` (travel, events, lodging, family), `races.yaml`, positions
    (strength placement, long-run day, PZE ride, HR caps), `questions.yaml`.
