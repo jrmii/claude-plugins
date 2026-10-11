@@ -35,10 +35,9 @@ no athlete data. Never answer from memory what a tool can tell you.
    picks; `gates`; `notes`; `earlier_this_week` (each earlier planned day with its `plan`,
    `scheduled` items, `overrides`, `gates`, `notes` and `record`); `active_constraints`;
    `pending_questions`; `preferences`.
-2. **Units:** `get_today` → `preferences` (if absent, the server predates v0.1.6:
-   `get_file("athlete.yaml")` once per conversation). Show *everything* in `distance_unit`, including distances
-   read from Garmin or Peloton (convert metres/km; show the conversion once); races keep
-   conventional names (5K, Half).
+2. **Units:** `get_today` → `preferences`. Show *everything* in `distance_unit`, including
+   distances read from Garmin or Peloton (convert metres/km; show the conversion once);
+   races keep conventional names (5K, Half).
    **Times:** show every time in the timezone of the interface the athlete is using right
    now (device local time), naming the zone (EDT, CDT, BST); never show raw UTC or `Z`.
    Stored instants (`recorded_at`, etc.) are UTC; older ones carry an offset (same instant).
@@ -60,9 +59,8 @@ no athlete data. Never answer from memory what a tool can tell you.
 4. `record` in `earlier_this_week` describes the **repo**, not reality. Actuals are written
    at the weekly reconcile, so `none`/`notes_only` mid-week is normal. Before saying
    anything about an earlier day, read Garmin activities for that date. Before raising
-   anything about how an earlier day went, read its `overrides` (if the day has no
-   `overrides` key, the server predates v0.1.6 and hides them on reconciled days: read
-   `get_file("weeks/<week>.yaml")` → `overrides:` instead).
+   anything about how an earlier day went, read its `overrides`: a recorded reason means
+   the athlete already answered.
 5. Notes with `superseded_by` were corrected by a later note: trust the later one. Notes
    with `resolved_by_override` had their open item (e.g. "reason not yet asked") answered
    by that override: don't re-ask.
