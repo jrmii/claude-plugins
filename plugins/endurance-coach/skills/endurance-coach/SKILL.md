@@ -1,6 +1,6 @@
 ---
 name: endurance-coach
-description: Coaching procedure for the athlete's endurance training (running, cycling, strength, triathlon) using the coach-state MCP ("Endurance Coach" connector) plus the Garmin Connect and Peloton connectors. Use for anything about today's or this week's workouts, how a session went, readiness/HRV/sleep gates, planning or changing training, strength class picks and weights, Peloton or Garmin workouts, races, weight and body composition, nutrition targets, meal logging, or restaurant/meal choices for macros.
+description: Coaching procedure for the athlete's endurance training (running, cycling, strength, triathlon) using the coach-state MCP ("Endurance Coach" connector) plus the Garmin Connect and Peloton connectors. Use for anything about today's or this week's workouts ("what's today look like?", "what's on today"), how a session went, readiness/HRV/sleep gates, planning or changing training, strength class picks and weights, Peloton or Garmin workouts, races, weight and body composition, nutrition targets, meal logging, or restaurant/meal choices for macros.
 ---
 
 # Endurance coach
@@ -33,9 +33,10 @@ no athlete data. Never answer from memory what a tool can tell you.
 
 1. `get_today` (coach-state). Read: `plan` for today; `garmin_workouts` and `peloton`
    picks; `gates`; `notes`; `earlier_this_week` (each earlier planned day with its `plan`,
-   `scheduled` items and `record`); `active_constraints`; `pending_questions`.
-2. **Units:** read `athlete.yaml` → `preferences` once per conversation
-   (`get_file("athlete.yaml")`). Show *everything* in `distance_unit`, including distances
+   `scheduled` items, `overrides`, `gates`, `notes` and `record`); `active_constraints`;
+   `pending_questions`; `preferences`.
+2. **Units:** `get_today` → `preferences` (if absent, the server predates v0.1.6:
+   `get_file("athlete.yaml")` once per conversation). Show *everything* in `distance_unit`, including distances
    read from Garmin or Peloton (convert metres/km; show the conversion once); races keep
    conventional names (5K, Half).
 3. **Nutrition, when a nutrition phase is active** (a deficit or target in
@@ -51,8 +52,13 @@ no athlete data. Never answer from memory what a tool can tell you.
    change them; data-defects.md). Never derive the deficit from them.
 4. `record` in `earlier_this_week` describes the **repo**, not reality. Actuals are written
    at the weekly reconcile, so `none`/`notes_only` mid-week is normal. Before saying
-   anything about an earlier day, read Garmin activities for that date.
-5. Notes with `superseded_by` were corrected by a later note: trust the later one.
+   anything about an earlier day, read Garmin activities for that date. Before raising
+   anything about how an earlier day went, read its `overrides` (if the day has no
+   `overrides` key, the server predates v0.1.6 and hides them on reconciled days: read
+   `get_file("weeks/<week>.yaml")` → `overrides:` instead).
+5. Notes with `superseded_by` were corrected by a later note: trust the later one. Notes
+   with `resolved_by_override` had their open item (e.g. "reason not yet asked") answered
+   by that override: don't re-ask.
 6. If `pending_questions` is non-empty, raise the most relevant one (one at a time).
 7. For standing decisions use `search_positions` before restating anything as settled.
    Positions sourced `athlete`/`agreed` are settled: if live data contradicts one, flag it
@@ -86,10 +92,13 @@ A plan entry may carry `gate:` (condition) and `fallback:`.
   recorded max/avg HR.
 - **Strength sessions: always run the check-in** (references/strength.md) and record the
   answers with `add_note`.
-- Divergence from the plan without a known reason: ask why (one question), then
-  `record_override(date, what, reason)` with the athlete's answer.
-- Free-text corrections of an earlier note: say which note (its date and time) is corrected
-  and what exactly was wrong.
+- Divergence from the plan without a known reason: first check that day's `overrides`
+  (step 4 above) and search past conversations for the date; ask why (one question) only
+  if neither has a reason. Then `record_override(date, what, reason)` with the athlete's
+  answer; if an earlier note that day left the reason open ("reason not yet asked"), pass
+  its `recorded_at` as `resolves_note`.
+- Corrections of an earlier note: `add_note(date, text, supersedes=<earlier note's
+  recorded_at>)` (same ISO week), and say in the text what exactly was wrong.
 
 ## Changing or planning workouts
 

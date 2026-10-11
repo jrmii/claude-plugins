@@ -26,7 +26,10 @@ scalar on a fixed ratio; use the coach-state protein target, not Garmin's.
    dinner, snacks), so pick a time inside the intended meal's window.
 4. Plain characters in names (`&`, not `&amp;`); pass every field explicitly on updates.
 5. Read back the day (`get_nutrition_daily_food_log`) and give the running totals vs target.
-- Logged rows copy values at log time; editing a custom food later never changes history.
+- Logged rows copy the food's values at log time; `update_custom_food` changes future
+  logs only. After correcting a custom food, `delete_food_log` + re-log every entry on the
+  dates that should change, then read the day back (rediscovered several times, last
+  2026-10-11).
 
 ## Recommending where or what to eat
 1. **First pull the last ~2 weeks of food logs** (and custom foods): recent restaurants,
