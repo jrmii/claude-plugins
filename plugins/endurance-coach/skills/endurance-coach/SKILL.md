@@ -39,6 +39,13 @@ no athlete data. Never answer from memory what a tool can tell you.
    `get_file("athlete.yaml")` once per conversation). Show *everything* in `distance_unit`, including distances
    read from Garmin or Peloton (convert metres/km; show the conversion once); races keep
    conventional names (5K, Half).
+   **Times:** show every time in the timezone of the interface the athlete is using right
+   now (device local time), naming the zone (EDT, CDT, BST); never show raw UTC or `Z`.
+   Stored instants (`recorded_at`, etc.) are UTC; older ones carry an offset (same instant).
+   Garmin: convert its GMT fields, don't trust `startTimeLocal` across travel. If the
+   interface gives no zone, use an active travel constraint's location, else
+   `preferences.home_timezone`. When traveling and the local date differs from home, pass
+   `date` to `get_today`. When writing to coach-state from Claude Code, stamp instants in UTC.
 3. **Nutrition, when a nutrition phase is active** (a deficit or target in
    `active_constraints`): Garmin `get_nutrition_daily_food_log(today)`. The day's calorie
    target is `dailyNutritionGoals.adjustedCalories` (Garmin's base goal + its credit for
