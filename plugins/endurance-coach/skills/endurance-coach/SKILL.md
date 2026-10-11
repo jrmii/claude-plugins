@@ -45,10 +45,12 @@ no athlete data. Never answer from memory what a tool can tell you.
    interface gives no zone, use an active travel constraint's location, else
    `preferences.home_timezone`. When traveling and the local date differs from home, pass
    `date` to `get_today`. When writing to coach-state from Claude Code, stamp instants in UTC.
-3. **Nutrition, when a nutrition phase is active** (a deficit or target in
-   `active_constraints`): Garmin `get_nutrition_daily_food_log(today)`. The day's calorie
-   target is `dailyNutritionGoals.adjustedCalories` (Garmin's base goal + its credit for
-   today's activity; the athlete wants this dynamic target, positions.md). Report calories
+3. **Nutrition:** at session start while a nutrition phase is active (a deficit or target
+   in `active_constraints`), and **whenever you report calories at all** (maintenance
+   included): Garmin `get_nutrition_daily_food_log(today)`. The day's calorie target is
+   always `dailyNutritionGoals.adjustedCalories` (Garmin's base goal + its credit for
+   today's activity; the athlete wants this dynamic target, positions.md). Read the number;
+   never report against the base `calorieGoal` or guess what the adjustment adds. Report calories
    and protein logged so far vs target and what remains (show the subtraction). On days
    with strength/stretch sessions, note that the activity credit runs high (data.md).
    A low `item_count` means a partly logged day: say so rather than call it a deficit.
