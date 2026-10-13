@@ -52,7 +52,7 @@ the repeat count after upload.
 2. `upload_workout(new)` → `get_workout_by_id(new)`: description intact?
 3. `schedule_workout(new, date)` → `get_scheduled_workouts(date, date)`: new entry present.
 4. `unschedule_workout(old scheduled_workout_id)` (calendar-entry id, not workout id),
-   then `delete_workout(old)`. From garmin_mcp 30324f7 on roac, deletes take two calls: the
+   then `delete_workout(old)`. Deletes take two calls (garmin_mcp 30324f7, live 2026-10-13): the
    first returns `status: needs_confirmation` with a preview. Check the preview is the old
    workout, then call again with `confirm=true`.
 5. Read back the whole affected range: exactly one entry per planned session, no
@@ -71,7 +71,7 @@ the repeat count after upload.
   execution": read back before retrying a write, so a retry can't create a duplicate.
 - Never HTML-escape names (`&` stays `&`).
 
-## Changes in garmin_mcp 30324f7 (once roac's pin moves)
+## Changes in garmin_mcp 30324f7 (live on roac 2026-10-13)
 
 - `delete_activity` permanently deletes a recorded activity and stays enabled on the hosted
   connector (athlete's decision, 2026-10-13). Use it only when the athlete explicitly asks to

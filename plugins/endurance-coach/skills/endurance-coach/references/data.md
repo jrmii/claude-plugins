@@ -69,8 +69,8 @@ before trusting a metric you haven't used recently. Summary of the traps that re
   `device_time_created_at` is local wall time; splits are pace-normalised.
 - Completed scheduled workouts disappear from `get_scheduled_workouts`.
 
-### Pending: garmin_mcp 30324f7 (applies once roac's pin moves; until then, old behaviour)
-Check roac's pinned SHA before relying on any of these. Don't compare old and new values.
+### garmin_mcp 30324f7 (live on roac 2026-10-13)
+Don't compare values read before 2026-10-13 with values read after.
 - `get_morning_training_readiness` returns the full readiness record (score, level, HRV,
   sleep, recovery); recovery time that has reached zero reads 0 h.
 - `get_weekly_intensity_minutes` `total_minutes` = moderate + 2 × vigorous (Garmin's goal
@@ -80,8 +80,7 @@ Check roac's pinned SHA before relying on any of these. Don't compare old and ne
 - Training status / load trend / load balance name the source device.
 - Laps with impossible distance (e.g. 42,949,672 m, a wrapped 32-bit counter on treadmill
   laps) come back with no distance and `distance_invalid: true` in `get_activity_splits` and
-  `get_activity_fit_data`: leave them out of distance and pace calculations. Before the
-  pin moves, drop such laps by hand.
+  `get_activity_fit_data`: leave them out of distance and pace calculations.
 
 ## Units and time
 - Everything shown to the athlete is in their unit (`athlete.yaml` →
