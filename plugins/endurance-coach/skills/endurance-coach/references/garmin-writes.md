@@ -73,8 +73,10 @@ the repeat count after upload.
 
 ## Changes in garmin_mcp 30324f7 (once roac's pin moves)
 
-- `delete_activity` permanently deletes a recorded activity (two-call confirm). Use it only
-  when the athlete explicitly asks to delete that specific activity.
+- `delete_activity` permanently deletes a recorded activity and stays enabled on the hosted
+  connector (athlete's decision, 2026-10-13). Use it only when the athlete explicitly asks to
+  delete that specific activity; show him the first call's preview and call again with
+  `confirm=true` only after he has seen it.
 - `schedule_week` reports errors per entry: read back every day, not only the failed ones.
   Invalid dates are rejected.
 - `upsert_and_log` returns JSON errors with `write_committed`. If it's `"unknown"` (including
