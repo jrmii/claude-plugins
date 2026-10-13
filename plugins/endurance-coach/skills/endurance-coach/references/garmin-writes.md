@@ -52,7 +52,9 @@ the repeat count after upload.
 2. `upload_workout(new)` → `get_workout_by_id(new)`: description intact?
 3. `schedule_workout(new, date)` → `get_scheduled_workouts(date, date)`: new entry present.
 4. `unschedule_workout(old scheduled_workout_id)` (calendar-entry id, not workout id),
-   then `delete_workout(old)`.
+   then `delete_workout(old)`. From garmin_mcp 30324f7 on roac, deletes take two calls: the
+   first returns `status: needs_confirmation` with a preview. Check the preview is the old
+   workout, then call again with `confirm=true`.
 5. Read back the whole affected range: exactly one entry per planned session, no
    duplicates.
 6. Record new workout_id / scheduled_id and what it replaced (week file `garmin.workouts`
@@ -68,3 +70,14 @@ the repeat count after upload.
 - The first call after ~1 h idle may fail with an opaque "Error occurred during tool
   execution": read back before retrying a write, so a retry can't create a duplicate.
 - Never HTML-escape names (`&` stays `&`).
+
+## Changes in garmin_mcp 30324f7 (once roac's pin moves)
+
+- `delete_activity` permanently deletes a recorded activity (two-call confirm). Use it only
+  when the athlete explicitly asks to delete that specific activity.
+- `schedule_week` reports errors per entry: read back every day, not only the failed ones.
+  Invalid dates are rejected.
+- `upsert_and_log` returns JSON errors with `write_committed`. If it's `"unknown"` (including
+  Garmin 5xx), read the day's food log before retrying.
+- `update_custom_food` finds the food by its ID and refuses the update if it can't read the
+  existing record, unless `serving_unit` and `number_of_units` are passed.

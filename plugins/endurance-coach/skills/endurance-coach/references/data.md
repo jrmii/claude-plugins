@@ -61,12 +61,26 @@ before trusting a metric you haven't used recently. Summary of the traps that re
   signal: check notes.
 
 ## Broken or tricky tool fields
-- `get_lactate_threshold` speed: wrong (1/raw instead of raw×10, inverts trends) until the
-  upstream fix is on roac. Take LT pace from the Connect app (`athlete.yaml`); LT HR is fine.
+- `get_lactate_threshold` speed: fixed on roac (2.917 m/s read 2026-10-13, matches
+  Connect); values read before the fix were 1/raw and are not comparable.
 - `get_stats_range`: 28-day cap; today is partial; `bmr_calories` is RMR.
 - Peloton `workouts_list`: interleaves Garmin-synced runs (`device_type garmin_connect`);
   `device_time_created_at` is local wall time; splits are pace-normalised.
 - Completed scheduled workouts disappear from `get_scheduled_workouts`.
+
+### Pending: garmin_mcp 30324f7 (applies once roac's pin moves; until then, old behaviour)
+Check roac's pinned SHA before relying on any of these. Don't compare old and new values.
+- `get_morning_training_readiness` returns the full readiness record (score, level, HRV,
+  sleep, recovery); recovery time that has reached zero reads 0 h.
+- `get_weekly_intensity_minutes` `total_minutes` = moderate + 2 × vigorous (Garmin's goal
+  count), higher than before for the same week; raw moderate/vigorous still reported.
+- `get_lactate_threshold` with a date range includes HR history; passing only one of
+  start/end date is an error.
+- Training status / load trend / load balance name the source device (fenix 8).
+- Laps with impossible distance (e.g. lap 5 of the 2026-10-11 treadmill run, 42,949,672 m)
+  come back with no distance and `distance_invalid: true` in `get_activity_splits` and
+  `get_activity_fit_data`: leave them out of distance and pace calculations. Before the
+  pin moves, drop such laps by hand.
 
 ## Units and time
 - Everything shown to the athlete is in their unit (`athlete.yaml` →
