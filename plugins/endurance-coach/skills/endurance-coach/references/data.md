@@ -61,8 +61,9 @@ before trusting a metric you haven't used recently. Summary of the traps that re
   signal: check notes.
 
 ## Broken or tricky tool fields
-- `get_lactate_threshold` speed: fixed on roac (2.917 m/s ≈ 9:12/mi read 2026-10-13, not
-  yet checked against Connect); values read before the fix were 1/raw, not comparable.
+- `get_lactate_threshold` speed: fixed on roac; values read before the fix were 1/raw and
+  are not comparable. Check a new reading against the Connect app before updating
+  `athlete.yaml`.
 - `get_stats_range`: 28-day cap; today is partial; `bmr_calories` is RMR.
 - Peloton `workouts_list`: interleaves Garmin-synced runs (`device_type garmin_connect`);
   `device_time_created_at` is local wall time; splits are pace-normalised.
@@ -76,9 +77,9 @@ Check roac's pinned SHA before relying on any of these. Don't compare old and ne
   count), higher than before for the same week; raw moderate/vigorous still reported.
 - `get_lactate_threshold` with a date range includes HR history; passing only one of
   start/end date is an error.
-- Training status / load trend / load balance name the source device (fenix 8).
-- Laps with impossible distance (e.g. lap 5 of the 2026-10-11 treadmill run, 42,949,672 m)
-  come back with no distance and `distance_invalid: true` in `get_activity_splits` and
+- Training status / load trend / load balance name the source device.
+- Laps with impossible distance (e.g. 42,949,672 m, a wrapped 32-bit counter on treadmill
+  laps) come back with no distance and `distance_invalid: true` in `get_activity_splits` and
   `get_activity_fit_data`: leave them out of distance and pace calculations. Before the
   pin moves, drop such laps by hand.
 
