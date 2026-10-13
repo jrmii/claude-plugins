@@ -61,8 +61,8 @@ before trusting a metric you haven't used recently. Summary of the traps that re
   signal: check notes.
 
 ## Broken or tricky tool fields
-- `get_lactate_threshold` speed: fixed on roac (2.917 m/s read 2026-10-13, matches
-  Connect); values read before the fix were 1/raw and are not comparable.
+- `get_lactate_threshold` speed: fixed on roac (2.917 m/s ≈ 9:12/mi read 2026-10-13, not
+  yet checked against Connect); values read before the fix were 1/raw, not comparable.
 - `get_stats_range`: 28-day cap; today is partial; `bmr_calories` is RMR.
 - Peloton `workouts_list`: interleaves Garmin-synced runs (`device_type garmin_connect`);
   `device_time_created_at` is local wall time; splits are pace-normalised.
