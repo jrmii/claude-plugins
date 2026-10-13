@@ -82,4 +82,6 @@ the repeat count after upload.
 - `upsert_and_log` returns JSON errors with `write_committed`. If it's `"unknown"` (including
   Garmin 5xx), read the day's food log before retrying.
 - `update_custom_food` finds the food by its ID and refuses the update if it can't read the
-  existing record, unless `serving_unit` and `number_of_units` are passed.
+  existing record, unless `serving_unit` and `number_of_units` are both passed. Passing both
+  is a full replace that clears every brand/nutrient field left out: never pass them just to
+  get past the refusal. Read the food back with `get_custom_foods` and tell the athlete.
