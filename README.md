@@ -43,3 +43,11 @@ claude plugin validate . && for p in plugins/*/; do claude plugin validate "$p";
 CI runs all three on every push. `plugins/<name>/.forbidden-patterns` lists regexes that
 must never appear in a plugin's files (personal identifiers, account-specific IDs); this
 repo is public.
+
+**Plugins that live in their own repo** (like `ballot-briefing`) are referenced, not copied:
+the entry uses a `github` source, and when that repo has no `.claude-plugin/plugin.json`
+the entry is the manifest (`"skills": ["./"]` for a root `SKILL.md`, plus author, license,
+etc.). Such an entry must set `"strict": false`: Claude Code installs it either way, but
+claude.ai skips it without that ("requires .claude-plugin/plugin.json ..."; verified
+2026-10-20). The checks above don't reach these plugins; their own repo's CI does. After
+adding one, sync on claude.ai (Plugins → Manage marketplaces) and confirm nothing is skipped.
