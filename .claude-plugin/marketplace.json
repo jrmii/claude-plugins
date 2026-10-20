@@ -14,6 +14,7 @@
         "source": "github",
         "repo": "jrmii/ballot-briefing"
       },
+      "strict": false,
       "description": "Ballot briefing: research every contest on a specific US ballot against the real duties of each office and produce a sourced, non-partisan, mobile-readable HTML briefing; then go deeper on any race the voter is still undecided about. Never recommends a candidate.",
       "skills": [
         "./"
