@@ -55,7 +55,11 @@ no athlete data. Never answer from memory what a tool can tell you.
 1. `get_today` (coach-state). Read: `plan` for today; `garmin_workouts` and `peloton`
    picks; `gates`; `notes`; `earlier_this_week` (each earlier planned day with its `plan`,
    `scheduled` items, `overrides`, `gates`, `notes` and `record`); `active_constraints`;
-   `pending_questions`; `preferences`.
+   `pending_questions`; `preferences`. From coach-state-mcp v0.1.8 also: `plan_status`
+   (`overridden` = read the override before quoting the plan); `upcoming` (the next 2
+   days, with `dated_positions`: a decision for a coming day may live only there);
+   `session_start_checks` (run them); `carryover` (fit in-window and overdue items into
+   rule 8); `traps` (facts you have got wrong before: never contradict one).
 2. **Units:** `get_today` → `preferences`. Show *everything* in `distance_unit`, including
    distances read from Garmin or Peloton (convert metres/km; show the conversion once);
    races keep conventional names (5K, Half).
@@ -135,8 +139,8 @@ A plan entry may carry `gate:` (condition) and `fallback:`.
 
 ## Changing or planning workouts
 
-- Weather matters for outdoor key sessions in heat: read the NWS hourly forecast
-  (references/planning.md) and decide indoor/outdoor on dew point and lightning risk.
+- Weather matters for every outdoor key session: coach-state `get_forecast` (NWS hourly;
+  references/planning.md); decide indoor/outdoor on dew point and lightning risk.
 - Any Garmin workout creation/replacement: follow references/garmin-writes.md exactly
   (naming, description with Peloton URL and weights, read-back, no duplicates).
 - Strength picks: references/strength.md (inspect structure, prescribe weights,

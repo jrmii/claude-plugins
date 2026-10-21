@@ -37,14 +37,14 @@ record notes/overrides but doesn't edit plan structure.
 - Commit with trailers: `Trigger`, `Actor`, `Model`, `Via` (coach-state README).
 
 ## Weather for outdoor key sessions (all year)
-- Location: coach-state `athlete.yaml` → `weather.home` (lat/lon), or an active travel
-  constraint's location. Never hard-code or guess coordinates.
-- NWS: `https://api.weather.gov/points/<lat>,<lon>` → `forecastHourly` URL; read
-  temperature, **dew point**, RH, wind, precipitation probability for the session window.
-  Show times in the athlete's local zone.
-- NWS requires a User-Agent: use `weather.user_agent` from `athlete.yaml`, a fixed project
-  string. **Never put the athlete's email, name or any personal identifier in a request
-  header or URL.** If WebFetch is refused (robots.txt), use curl with that header.
+- Use coach-state `get_forecast(date, from_hour, to_hour)`: NWS hourly with temperature,
+  **dew point**, RH, wind, precipitation probability and a `thunder` flag. It defaults to
+  the athlete's home; when traveling, pass the trip location's `lat`/`lon` (US only).
+  Times come back local to the location; cite the `updated` time.
+- Only if that tool is unavailable: NWS `https://api.weather.gov/points/<lat>,<lon>` →
+  `forecastHourly`, with coordinates from `athlete.yaml` → `weather.home` and the
+  User-Agent from `weather.user_agent` (a fixed project string). **Never put the athlete's
+  email, name or any personal identifier in a request header or URL.**
 - Outside the hot months the same read covers cold, wind, rain and darkness (sunrise for
   early starts).
 - Dew point in the mid-70s °F with air in the high 70s means little evaporative cooling:
