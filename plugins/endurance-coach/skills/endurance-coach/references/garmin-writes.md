@@ -6,9 +6,21 @@ the current conversation. Every write is followed by a read-back.
 ## Workout naming
 
 - Prefix `EC W<week> <Day> - `, e.g. `EC W42 Mon - Peloton: 20 min Strength for Runners (Wilpers)`.
-- **Front-load the meaning.** The watch names the recorded *activity* from the scheduled
-  workout at 32 characters, so the first 32 characters must identify the session.
+- **Front-load the meaning.** Garmin Connect stores long workout and activity names; the
+  limit is the **watch's**: the workout copy it receives carries the name cut to 32
+  characters (FIT `wkt_name`), and Connect names the recorded activity from that (outdoor
+  runs get a location prefix in front, e.g. "<County> - " + 32). So the first 32
+  characters must identify the session. Whether Connect or the watch does the cut is
+  unresolved; the effect is the same.
 - `OPTIONAL` goes right after the day when the session is optional.
+
+## After a watch-recorded session from a scheduled workout
+
+Rename the activity to the full workout name: `set_activity_name(activity_id, <full
+name>)`, then read back with `get_activity`. Keep a location prefix if Connect added one.
+The rename is service-side only: the original FIT still holds the cut name, so raw-FIT
+consumers (Strava, FIT tools) keep seeing the short one. Rename only the watch recording,
+never a Peloton-synced copy (those already carry the class title).
 
 ## Peloton pointer workouts
 

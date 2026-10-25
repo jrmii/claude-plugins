@@ -46,7 +46,12 @@ before trusting a metric you haven't used recently. Summary of the traps that re
   tells them apart: keep the GARMIN copy.
 - Peloton stretch classes arrive as `strength_training` (since Aug 2026; `mobility`
   before): don't count ≤15-min "Stretch" entries as strength sessions.
-- The watch truncates activity names created from workouts at 32 characters.
+- The watch truncates activity names created from workouts at 32 characters (Connect
+  itself takes long names; rename afterwards, references/garmin-writes.md).
+- Activity temperature: if coach-state records an external temperature sensor (e.g. a
+  Garmin Tempe, data-defects.md), activity temps come from it, not the wrist sensor; read
+  where it was mounted before calling them ambient. The weather card in `get_activity` is a
+  nearby station (often an airport), not the athlete's sensor.
 - Treadmill runs: "Save & Calibrate" on the watch corrects the total distance only; lap
   distances and paces stay the uncalibrated accelerometer estimate. Use Peloton belt data
   for pace within a Tread run.

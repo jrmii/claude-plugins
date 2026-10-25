@@ -113,6 +113,8 @@ A plan entry may carry `gate:` (condition) and `fallback:`.
 
 - Pull the activity (`get_activities_by_date` for the date, then `get_activity` for
   detail: device, training effect, load, power, laps). This is **Garmin's record only**.
+  A watch recording of a scheduled workout carries a name cut to 32 characters: rename
+  it to the full workout name and read back (references/garmin-writes.md).
 - **Sessions on Peloton equipment (Tread, Bike, Guide): also pull the Peloton workout.**
   `workouts_list` (match the one starting within ~150 s of the Garmin activity), then
   `workouts_performance(workout_id, every_n=..., select=...)` with a narrow `select`.
