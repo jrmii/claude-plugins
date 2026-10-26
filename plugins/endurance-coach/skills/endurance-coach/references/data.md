@@ -65,7 +65,29 @@ before trusting a metric you haven't used recently. Summary of the traps that re
 - A low sleep score with a known logistics cause (late pickup, travel) is not a recovery
   signal: check notes.
 
+## FIT-only data (`get_activity_fit_messages`)
+The curated endpoints (`get_activity`, splits, HR zones) don't carry everything the devices
+record. Before saying a signal is "not available", check the FIT file.
+- `record` messages, 1 Hz: `heart_rate` is the merged HR (strap, falling back to wrist
+  when the strap drops); field 144 (`unknown_144`) is strap-only HR, so gaps there mark
+  strap dropouts; field 108 is breathing rate × 100 (`enhanced_respiration_rate`, br/min)
+  from a chest strap that records it (e.g. HRM 600). A step in breathing rate at a steady
+  stage is a ventilatory-threshold marker.
+- Running dynamics in `record` (ground contact time, ground contact balance % left,
+  vertical ratio) need a strap or pod. Compare left/right balance only within one surface
+  (treadmill vs outdoor differ).
+- `device_info`: firmware per device (watch, sensor hub, wrist HR, strap) and sensor
+  connect events. A normal run shows a handful of connects per sensor; many more means
+  the sensor kept dropping. Check it when HR looks wrong.
+- Size: a 1 Hz record stream returns several KB per record, so a whole run can close the
+  connection. Ask only for the fields you need if the tool takes a field list; otherwise
+  page with `message_limit` ≤400.
+
 ## Broken or tricky tool fields
+- `get_vo2max_trend` has returned the cycling series with no sport selector; running
+  VO2max is in `get_training_status`. Check which sport a series is before quoting it.
+- Garmin's auto-detected lactate threshold from a treadmill run uses the watch's speed
+  estimate, not belt speed: check the pace against the belt before adopting it.
 - `get_lactate_threshold` speed: fixed on roac; values read before the fix were 1/raw and
   are not comparable. Check a new reading against the Connect app before updating
   `athlete.yaml`.
