@@ -69,16 +69,35 @@ before trusting a metric you haven't used recently. Summary of the traps that re
 The curated endpoints (`get_activity`, splits, HR zones) don't carry everything the devices
 record. Before saying a signal is "not available", check the FIT file.
 - `record` messages, 1 Hz: `heart_rate` is the merged HR (strap, falling back to wrist
-  when the strap drops); field 144 (`unknown_144`) is strap-only HR, so gaps there mark
-  strap dropouts; field 108 is breathing rate × 100 (`enhanced_respiration_rate`, br/min)
-  from a chest strap that records it (e.g. HRM 600). A step in breathing rate at a steady
-  stage is a ventilatory-threshold marker.
+  when the strap drops). Undocumented fields, mapped 2026-10-30 against Connect on 3-6
+  activities each, on the athlete's watch and strap (models and firmware in coach-state
+  data-defects). The connector returns the raw names until the upstream garmin_mcp release
+  adds aliases:
+
+  | Raw field | Meaning | Confidence |
+  |---|---|---|
+  | `unknown_144` | strap-only HR (gaps mark strap dropouts) | confirmed |
+  | `unknown_136` | wrist optical HR (equals `heart_rate` when no strap) | likely |
+  | 108 (`enhanced_respiration_rate`) | breathing rate × 100, br/min; strap only | FIT SDK |
+  | `unknown_143` | Body Battery (last − first = activity Body Battery impact) | confirmed |
+  | `unknown_137` | potential stamina % | confirmed |
+  | `unknown_138` | available stamina % (drops below potential on hard efforts) | confirmed |
+  | `unknown_90` | performance condition (Connect's chart, sample for sample) | confirmed |
+
+  On a different watch or firmware, re-check before relying on a mapping. A step in
+  breathing rate at a steady stage is a ventilatory-threshold marker; flat breathing rate
+  while HR climbs at a steady pace points to heat drift, not rising intensity.
+- **Strap test** (post-session, any run with a strap): count records where `heart_rate`
+  equals `unknown_144`. Near 100% means the strap supplied HR throughout. Zero
+  `unknown_144` samples means wrist HR only.
 - Running dynamics in `record` (ground contact time, ground contact balance % left,
   vertical ratio) need a strap or pod. Compare left/right balance only within one surface
   (treadmill vs outdoor differ).
-- `device_info`: firmware per device (watch, sensor hub, wrist HR, strap) and sensor
-  connect events. A normal run shows a handful of connects per sensor; many more means
-  the sensor kept dropping. Check it when HR looks wrong.
+- `device_info`: firmware per device (watch, sensor hub, wrist HR, strap), battery, and
+  sensor announcements. A clean run announces each sensor at the start and end only, so
+  0 reconnects. Count announcements per serial and source (BLE vs ANT+), minus those two;
+  one strap on both radios shows twice. Its second serial isn't stable between runs, so
+  don't identify the strap by serial.
 - Size: a 1 Hz record stream returns several KB per record, so a whole run can close the
   connection. Ask only for the fields you need if the tool takes a field list; otherwise
   page with `message_limit` ≤400.
