@@ -12,6 +12,17 @@ Targets (calories, protein, deficit phases) are decisions in coach-state: read
 `search_positions("protein")`. The Garmin nutrition plan's own macro split is a single
 scalar on a fixed ratio; use the coach-state protein target, not Garmin's.
 
+## Fuel and electrolyte arithmetic (long runs, rides)
+- Before any carb or sodium per-hour or inventory math, read the label facts from
+  coach-state (the consumables record, or positions "Carb source" and the note it cites),
+  never from a product name or the front of the bag. A front-of-bag figure is often per
+  litre at the label's mix, not per serving.
+- Write the basis next to every figure: per serving, per scoop, per bottle as mixed, or
+  per litre. A label "serving" can be several scoops; count inventory in units as used
+  (scoops, bottles as mixed, gels, chew packs), never label servings.
+- No label facts on record: say the math can't be done yet and ask for the nutrition
+  panel (a photo is fine); don't estimate from the name.
+
 ## Logging a meal
 1. Identify each item and portion; estimate macros explicitly (show per-item numbers).
 2. Before creating anything, look in **both** places: the athlete's custom foods

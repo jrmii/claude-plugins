@@ -50,8 +50,10 @@ before trusting a metric you haven't used recently. Summary of the traps that re
   itself takes long names; rename afterwards, references/garmin-writes.md).
 - Activity temperature: if coach-state records an external temperature sensor (e.g. a
   Garmin Tempe, data-defects.md), activity temps come from it, not the wrist sensor; read
-  where it was mounted before calling them ambient. The weather card in `get_activity` is a
-  nearby station (often an airport), not the athlete's sensor.
+  where it was mounted before calling them ambient. The weather card in `get_activity` and
+  `get_activity_weather` is a nearby station (often an airport), not the athlete's sensor
+  or route: quote it as "station <id>", and treat saturated readings (100% RH, dew point
+  equal to air temperature) as station conditions that may overstate the run's.
 - Treadmill runs: "Save & Calibrate" on the watch corrects the total distance only; lap
   distances and paces stay the uncalibrated accelerometer estimate. Use Peloton belt data
   for pace within a Tread run.
@@ -162,5 +164,9 @@ Don't compare values read before 2026-10-13 with values read after.
 ## Evidence hygiene
 - Every number gets an as-of date and its source (tool + date range).
 - Don't infer a trend from two endpoints: pull the interval.
+- **Ask about excursions; don't smooth them.** A spike, dip or outlier in a series is
+  never folded into a min–max range or an average without comment. Check coach-state
+  (notes, constraints: travel, illness, events) and past conversations for its cause and
+  cite it; if none is found, name the excursion with its date and size and ask (rule 9).
 - Separate heat from fitness before attributing an HR or pace change (outdoor heat inflates
   HR markedly in the warm months; see positions).

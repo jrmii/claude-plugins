@@ -113,7 +113,15 @@ no athlete data. Never answer from memory what a tool can tell you.
    the athlete already answered.
 5. Notes with `superseded_by` were corrected by a later note: trust the later one. Notes
    with `resolved_by_override` had their open item (e.g. "reason not yet asked") answered
-   by that override: don't re-ask.
+   by that override: don't re-ask. Before asking **any** open item taken from a note
+   ("assumed", "not yet confirmed", "reason not yet asked"), search past conversations
+   for that date (`conversation_search`): if it was answered there, record the answer
+   (`add_note` with `supersedes`) and don't ask. When writing a note, record an answer that
+   arrives in the same conversation; never leave an "assumed / not confirmed" line that
+   was answered.
+   A `session_start_checks` item with a time window (a weigh-in) that finds nothing yet
+   is "not yet as of HH:MM", not an absence: say so, and read again before closing the
+   turn and at the next session start that day.
 6. If `pending_questions` is non-empty, raise the most relevant one (one at a time).
    Otherwise, unless he has already said today, ask how he's feeling (one open question),
    then apply rule 8 to today and the next couple of days.
@@ -136,8 +144,10 @@ A plan entry may carry `gate:` (condition) and `fallback:`.
 
 - Pull the activity (`get_activities_by_date` for the date, then `get_activity` for
   detail: device, training effect, load, power, laps). This is **Garmin's record only**.
-  A watch recording of a scheduled workout carries a name cut to 32 characters: rename
-  it to the full workout name and read back (references/garmin-writes.md).
+  **Name check, every pull:** a watch recording of a scheduled workout carries a name cut
+  to 32 characters. Compare the activity name with the scheduled workout's name; if it's
+  cut, `set_activity_name` to the full name in the same turn (bookkeeping, no go-ahead),
+  read back, and say so in one line (references/garmin-writes.md).
 - **Sessions on Peloton equipment (Tread, Bike, Guide): also pull the Peloton workout.**
   `workouts_list` (match the one starting within ~150 s of the Garmin activity), then
   `workouts_performance(workout_id, every_n=..., select=...)` with a narrow `select`.

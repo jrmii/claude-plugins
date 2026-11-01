@@ -29,6 +29,10 @@ record notes/overrides but doesn't edit plan structure.
 - Respect the season target, then adjust for readiness and constraints. Gates only hold or
   reduce; put a `gate:` + `fallback:` on key sessions (quality and long run).
 - Strength per references/strength.md and the placement position.
+- **Long runs default to a plain Run**, not a structured workout: Garmin holds the
+  watch's eat/drink alerts while a structured workout runs, so fuel reminders don't fire.
+  If a long run needs structure (segments, a test), build in explicit fuel steps at the
+  30-min slots instead, and say which the athlete is getting.
 - **A test must be able to fire its own rule.** Before placing a test or check inside a
   session (a ramp, a nasal-breathing threshold check, a strap test), write its decision
   rule ("if X happens, then Y") and confirm the session's caps, alerts, venue and duration
