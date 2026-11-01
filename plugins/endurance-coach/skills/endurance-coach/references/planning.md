@@ -24,6 +24,17 @@ record notes/overrides but doesn't edit plan structure.
 3. Read current state from Garmin: training status (acute/chronic load, ratio, load
    balance), HRV trend (2 weeks), sleep (1 week), readiness, last 1–2 weeks of activities.
    Note recent illness/travel/heat.
+4. **Consumables and gear** (positions "Consumables"): project, don't just report.
+   - Fuel: `get_inventory` on hand vs need through the next restock window (long-run
+     minutes / 30 = units; real food counts on the Tread), and drink mix by bottles per
+     run. Name the run where stock runs out and the order-by date (allow shipping).
+   - Shoes and bikes: `get_gear` distance vs retirement (shoes 400 mi), projected from the
+     season's weekly volume to each race date; a race pair must be broken in before it.
+   - Service items: anything `due` within the next ~4 weeks or overdue; `check_mileage`
+     items against `get_gear`. Say what to do and by when.
+   - New gear or a new practice (tubeless tires, a helmet, a new strap): add it to
+     `inventory.yaml` in Claude Code with its interval and source, and record when it
+     was last done (ask; don't guess dates).
 
 ## Building the week
 - Respect the season target, then adjust for readiness and constraints. Gates only hold or
@@ -83,9 +94,9 @@ quote them, don't improvise. In order:
     `thunder` flag, rising thunderstorm probability in the window), any NWS warning or
     watch for the window (tropical storm, hurricane, tornado, high wind, flood, extreme
     heat), flooding or debris on the route, dense fog on dark roads, or an air-quality
-    alert. Go indoors, move the start, or shorten. `get_forecast` has no alerts: check
-    NWS alerts for the location (api.weather.gov `alerts/active?point=<lat>,<lon>`,
-    same User-Agent rule) before any outdoor long run.
+    alert. Go indoors, move the start, or shorten. `get_forecast` (coach-state-mcp
+    v0.1.12) returns active NWS `alerts` with `in_window`; alerts are what's active now,
+    so read again the day before and the morning of any outdoor long run.
   - Heat changes how, not where: at dew point ≥ 70 °F raise fluid, set a slower expected
     pace at the same effort, plan cooling and an early start. Heat index ≥ 103 °F for
     most of the window: start earlier or go indoors.

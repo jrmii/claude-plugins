@@ -14,7 +14,8 @@ scalar on a fixed ratio; use the coach-state protein target, not Garmin's.
 
 ## Fuel and electrolyte arithmetic (long runs, rides)
 - Before any carb or sodium per-hour or inventory math, read the label facts from
-  coach-state (the consumables record, or positions "Carb source" and the note it cites),
+  coach-state (`get_inventory` labels and per-flavor facts, or positions "Carb source"
+  and the note it cites),
   never from a product name or the front of the bag. A front-of-bag figure is often per
   litre at the label's mix, not per serving.
 - Write the basis next to every figure: per serving, per scoop, per bottle as mixed, or

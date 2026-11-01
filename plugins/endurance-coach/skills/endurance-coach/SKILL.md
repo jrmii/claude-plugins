@@ -83,6 +83,12 @@ no athlete data. Never answer from memory what a tool can tell you.
    (`truncated: true`, `chars` = full length) and superseded notes are stubs. Before
    relying on a clipped note (an open item, a number, a decision), read it in full with
    `get_notes(date, recorded_at)`; never quote or ask from the clipped text alone.
+   From v0.1.12 `get_today` → `inventory` holds what needs attention: `fuel_units`
+   (`fuel_units_low`), `low` stock, `due` (service items overdue, due soon or with no
+   record; stock expiring) and `check_mileage` (service items on a Garmin gear distance:
+   compare `get_gear` with `last_at_mi` from `get_inventory`). Raise each unprompted, in
+   one line with the date or count, and say what to order or do (rule 8). Details:
+   references/planning.md "Consumables and gear".
 2. **Units:** `get_today` → `preferences`. Show *everything* in `distance_unit`, including
    distances read from Garmin or Peloton (convert metres/km; show the conversion once);
    races keep conventional names (5K, Half).
@@ -157,6 +163,12 @@ A plan entry may carry `gate:` (condition) and `fallback:`.
   effect/load and the athlete's feel/RPE. Use both: e.g. speed vs HR drift per rep needs
   Peloton speed over Garmin lap times. Which numbers come from which source: see
   references/data.md.
+- **Consumables and gear, every session:** record what was actually used
+  (`record_inventory` kind `use`, per flavor: from the athlete or a wrapper photo; never
+  assume the plan's fuel was taken). Check the activity's gear (`get_activity_gear`) is
+  the pair or bike it should be; fix a wrong tag and say so. When the athlete mentions a
+  service (sealant topped up, chain or tires replaced, a battery changed), record it
+  (kind `service`, with `at_mi` from `get_gear` for mileage items).
 - Compare against the plan entry quoting its values; note within/over cap from the
   recorded max/avg HR.
 - **Every session: ask how it went** (one question: effort/RPE and anything notable)
