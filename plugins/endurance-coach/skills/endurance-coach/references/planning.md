@@ -102,7 +102,9 @@ quote them, don't improvise. In order:
     heat), flooding or debris on the route, dense fog on dark roads, or an air-quality
     alert. Go indoors, move the start, or shorten. `get_forecast` (coach-state-mcp
     v0.1.12) returns active NWS `alerts` with `in_window`; alerts are what's active now,
-    so read again the day before and the morning of any outdoor long run.
+    so read again the day before and the morning of. This applies to **every** outdoor
+    session (easy runs and rides too), not only long runs: session-start check
+    `weather-alerts`.
   - Heat changes how, not where: at dew point ≥ 70 °F raise fluid, set a slower expected
     pace at the same effort, plan cooling and an early start. Heat index ≥ 103 °F for
     most of the window: start earlier or go indoors.

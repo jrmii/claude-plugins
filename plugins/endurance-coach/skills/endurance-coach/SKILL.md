@@ -89,6 +89,11 @@ no athlete data. Never answer from memory what a tool can tell you.
    compare `get_gear` with `last_at_mi` from `get_inventory`). Raise each unprompted, in
    one line with the date or count, and say what to order or do (rule 8). Details:
    references/planning.md "Consumables and gear".
+   **Weather alerts, every session start:** for each session today and in `upcoming`
+   that could be outdoors (any run or ride not set on the Tread or a trainer), call
+   `get_forecast` for that date and window and report every `in_window` alert by name
+   with its end time. An alert is a danger call (references/planning.md venue rule),
+   even on an easy or rest-adjacent day.
 2. **Units:** `get_today` → `preferences`. Show *everything* in `distance_unit`, including
    distances read from Garmin or Peloton (convert metres/km; show the conversion once);
    races keep conventional names (5K, Half).
