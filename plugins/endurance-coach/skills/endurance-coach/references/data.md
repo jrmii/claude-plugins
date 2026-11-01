@@ -74,13 +74,15 @@ record. Before saying a signal is "not available", check the FIT file.
   when the strap drops). Undocumented fields, mapped 2026-10-30 to 11-01 on the athlete's
   watch and strap (models and firmware in coach-state data-defects). "Exact" = equal to
   Connect's per-second activity-details series, timestamp by timestamp, on 4 runs;
-  "likely" = no Connect series to compare, inferred from behaviour. The connector returns
+  "confirmed" = settled by controlled recordings (2026-11-01: strap only with wrist HR off,
+  both, wrist only); "likely" = no Connect series to compare, inferred from behaviour.
+  The connector returns
   the raw names until the upstream garmin_mcp release adds aliases:
 
   | Raw field (`record`) | Meaning | Confidence |
   |---|---|---|
-  | `unknown_144` | strap-only HR: equals `heart_rate` while the strap is on, stops when it drops, absent with no strap | likely |
-  | `unknown_136` | wrist optical HR (equals `heart_rate` on a no-strap run) | likely |
+  | `unknown_144` | strap-only HR: equals `heart_rate` while the strap is on, stops when it drops, absent with no strap | confirmed |
+  | `unknown_136` | wrist optical HR: equals `heart_rate` with no strap, absent with wrist HR off | confirmed |
   | 108 (`enhanced_respiration_rate`) | breathing rate × 100, br/min; strap only | exact |
   | `unknown_143` | Body Battery (last − first = activity Body Battery impact) | exact |
   | `unknown_137` | potential stamina % | exact |
@@ -108,8 +110,8 @@ record. Before saying a signal is "not available", check the FIT file.
   while HR climbs at a steady pace points to heat drift, not rising intensity.
 - **Strap test** (post-session, any run with a strap): count records where `heart_rate`
   equals `unknown_144`. Near 100% means the strap supplied HR throughout. Zero
-  `unknown_144` samples means wrist HR only. (Rests on the "likely" 144 mapping; say so
-  if the result matters.)
+  `unknown_144` samples means wrist HR only. With both sensors on, `heart_rate` follows
+  the strap.
 - Running dynamics in `record` (ground contact time, ground contact balance % left,
   vertical ratio) need a strap or pod. Compare left/right balance only within one surface
   (treadmill vs outdoor differ).
