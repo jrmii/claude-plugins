@@ -77,10 +77,19 @@ quote them, don't improvise. In order:
   email, name or any personal identifier in a request header or URL.**
 - Outside the hot months the same read covers cold, wind, rain and darkness (sunrise for
   early starts).
-- Dew point in the mid-70s °F with air in the high 70s means little evaporative cooling:
-  an HR-capped outdoor session turns into heavy walking; prefer the treadmill.
-- Thunderstorm probability rising through the session window is a safety call, not a
-  training one: move indoors or shorten.
+- **Long-run venue** follows the athlete's position "Long-run venue: outdoor vs Tread"
+  (standing rule 2026-11-01): outdoors by default, never a dew-point lookup.
+  - Lightning (the `thunder` flag, rising thunderstorm probability in the window, a
+    severe-weather alert) is the hard indoor trigger; moving the start time also works.
+  - Heat changes how, not where: at dew point ≥ 70 °F raise fluid, set a slower expected
+    pace at the same effort, plan cooling and an early start. Heat index ≥ 103 °F for
+    most of the window: start earlier or go indoors.
+  - Write the bail rule into the day entry: Tread at a house stop if nasal breathing
+    breaks at easy feel, or on heat signs.
+  - The athlete may pick the Tread on the day without a reason: record the swap
+    (`record_override`) and adjust fuel. His Tread dislike is a real cost in every call.
+- Thunderstorm probability rising through any outdoor session window is a safety call,
+  not a training one: move indoors or shorten.
 - Check the alternative day before proposing a swap; cite the forecast issue time.
 
 ## Mid-week review ("should I continue as planned?")
