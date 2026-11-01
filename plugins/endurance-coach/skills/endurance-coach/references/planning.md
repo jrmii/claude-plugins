@@ -48,6 +48,24 @@ record notes/overrides but doesn't edit plan structure.
   in `garmin.workouts`, picks in `peloton:` with `why`, `prescription`, `check_in`.
 - Commit with trailers: `Trigger`, `Actor`, `Model`, `Via` (coach-state README).
 
+## Sick days
+The criteria are the athlete's position "Sick-day procedure" (`search_positions("sick")`):
+quote them, don't improvise. In order:
+1. Ask about symptoms (one question): fever, aches, chest, stomach, or only above the neck.
+2. Any rest criterion (fever, whole-body, chest, GI): rest; record an override for the
+   planned session.
+3. Above the neck only: the objective check (waking resting HR vs its 7-day baseline;
+   HRV). Before counting a rise or drop, check the week's notes and constraints for a
+   known cause (travel, short sleep, alcohol, heat, yesterday's hard session): name it
+   and let the symptoms and the 10-minute test decide. With no known cause, the check
+   stands.
+4. Easy session with the 10-minute test; no intensity, long runs or heavy strength until
+   symptoms are gone. Stop signs (chest pain, palpitations, HR out of line with effort,
+   dizziness, disproportionate breathlessness) end the session: tell the athlete to get
+   checked.
+5. Return per the position; missed volume isn't made up. Note each sick day's symptoms
+   and decision with `add_note`.
+
 ## Weather for outdoor key sessions (all year)
 - Use coach-state `get_forecast(date, from_hour, to_hour)`: NWS hourly with temperature,
   **dew point**, RH, wind, precipitation probability and a `thunder` flag. It defaults to
