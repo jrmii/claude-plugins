@@ -9,11 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # the version guard diffs against the push's base
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Skill checks (frontmatter, links, size, no personal data)
         run: python3 scripts/check_skills.py
+        env:
+          CHECK_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
       - name: Checker self-tests
         working-directory: scripts
         run: python3 -m unittest -v
