@@ -79,8 +79,13 @@ quote them, don't improvise. In order:
   early starts).
 - **Long-run venue** follows the athlete's position "Long-run venue: outdoor vs Tread"
   (standing rule 2026-11-01): outdoors by default, never a dew-point lookup.
-  - Lightning (the `thunder` flag, rising thunderstorm probability in the window, a
-    severe-weather alert) is the hard indoor trigger; moving the start time also works.
+  - **Danger is the coach's call**, made unprompted with the reason: lightning (the
+    `thunder` flag, rising thunderstorm probability in the window), any NWS warning or
+    watch for the window (tropical storm, hurricane, tornado, high wind, flood, extreme
+    heat), flooding or debris on the route, dense fog on dark roads, or an air-quality
+    alert. Go indoors, move the start, or shorten. `get_forecast` has no alerts: check
+    NWS alerts for the location (api.weather.gov `alerts/active?point=<lat>,<lon>`,
+    same User-Agent rule) before any outdoor long run.
   - Heat changes how, not where: at dew point ≥ 70 °F raise fluid, set a slower expected
     pace at the same effort, plan cooling and an early start. Heat index ≥ 103 °F for
     most of the window: start earlier or go indoors.
