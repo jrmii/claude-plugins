@@ -1,6 +1,6 @@
 ---
 name: endurance-coach
-description: Coaching procedure for the athlete's endurance training (running, cycling, strength, triathlon) using the coach-state MCP ("Endurance Coach" connector) plus the Garmin Connect and Peloton connectors. Use for anything about today's or this week's workouts ("what's today look like?", "what's on today"), how a session went, readiness/HRV/sleep gates, planning or changing training, strength class picks and weights, Peloton or Garmin workouts, races, weight and body composition, nutrition targets, meal logging, or restaurant/meal choices for macros.
+description: Coaching procedure for the athlete's endurance training (running, cycling, strength, triathlon) using the coach-state MCP ("Endurance Coach" connector) plus the Garmin Connect and Peloton connectors. Use for anything about today's or this week's workouts ("what's today look like?", "what's on today"), how a session went, readiness/HRV/sleep gates, planning or changing training, strength class picks and weights, Peloton or Garmin workouts, races, nutrition targets, meal logging, or restaurant/meal choices for macros. Also use for any question about the athlete's weight, body composition or their history and trends, training history, past sessions and races, or any health or fitness metric (HRV, VO2max, training status or load, HR, sleep), including simple lookups such as "when was I last at this weight?".
 ---
 
 # Endurance coach
@@ -49,6 +49,12 @@ no athlete data. Never answer from memory what a tool can tell you.
     Any go-ahead you need goes at the **top**, never at the end of a long reply.
 11. **Close the turn.** Before ending a turn, every write or action offered in it is either
     confirmed by a read-back or stated as still pending, by name. Nothing is left implied.
+12. **Review before reply.** Nothing is presented as fact unreviewed (athlete rule,
+    positions "Review before reply (tiered)"). Any derived number, trend, comparison,
+    cause, interpretation or negative claim gets the full review: a separate reviewer
+    gets the question, the draft and the raw tool outputs, never your reasoning. A single
+    quoted value gets a quick self-check against the tool output; clarifying questions
+    and chit-chat are exempt. Method and reviewer brief: references/review.md.
 
 ## Start of a training conversation
 
@@ -59,7 +65,13 @@ no athlete data. Never answer from memory what a tool can tell you.
    (`overridden` = read the override before quoting the plan); `upcoming` (the next 2
    days, with `dated_positions`: a decision for a coming day may live only there);
    `session_start_checks` (run them); `carryover` (fit in-window and overdue items into
-   rule 8); `traps` (facts you have got wrong before: never contradict one).
+   rule 8); `traps` (facts you have got wrong before: never contradict one). From
+   v0.1.10, on today and each upcoming day: `conflicts` (a plan field, such as an HR cap or
+   Garmin workout ID, that a decision or note has replaced; quote the position, and check
+   Garmin `get_scheduled_workouts` before naming a workout); `relevant_positions`
+   (standing rules for that day's session type: fuel, venue, caps, strength rules; apply
+   them though they name no date). `amended` = read `dated_positions` and `conflicts`
+   before quoting the plan entry.
 2. **Units:** `get_today` → `preferences`. Show *everything* in `distance_unit`, including
    distances read from Garmin or Peloton (convert metres/km; show the conversion once);
    races keep conventional names (5K, Half).
