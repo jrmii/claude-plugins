@@ -24,7 +24,13 @@ record notes/overrides but doesn't edit plan structure.
 3. Read current state from Garmin: training status (acute/chronic load, ratio, load
    balance), HRV trend (2 weeks), sleep (1 week), readiness, last 1–2 weeks of activities.
    Note recent illness/travel/heat.
-4. **Consumables and gear** (positions "Consumables"): project, don't just report.
+4. **Threshold freshness.** Read `athlete.yaml` thresholds (LTHR, threshold pace, VT1
+   proxy, max HR) with their dates, and Garmin `get_lactate_threshold` /
+   `get_heart_rate_zones`. Flag a value older than ~8 weeks, or one Garmin's auto-detect
+   changed since it was recorded, and propose a re-test slot (TT, ramp) in the plan
+   rather than quoting a stale number. A treadmill auto-detect's pace isn't adopted
+   without a belt check (data.md).
+5. **Consumables and gear** (positions "Consumables"): project, don't just report.
    - Fuel: `get_inventory` on hand vs need through the next restock window (long-run
      minutes / 30 = units; real food counts on the Tread), and drink mix by bottles per
      run. Name the run where stock runs out and the order-by date (allow shipping).
