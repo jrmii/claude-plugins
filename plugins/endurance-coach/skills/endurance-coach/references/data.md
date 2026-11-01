@@ -69,27 +69,45 @@ before trusting a metric you haven't used recently. Summary of the traps that re
 The curated endpoints (`get_activity`, splits, HR zones) don't carry everything the devices
 record. Before saying a signal is "not available", check the FIT file.
 - `record` messages, 1 Hz: `heart_rate` is the merged HR (strap, falling back to wrist
-  when the strap drops). Undocumented fields, mapped 2026-10-30 against Connect on 3-6
-  activities each, on the athlete's watch and strap (models and firmware in coach-state
-  data-defects). The connector returns the raw names until the upstream garmin_mcp release
-  adds aliases:
+  when the strap drops). Undocumented fields, mapped 2026-10-30 to 11-01 on the athlete's
+  watch and strap (models and firmware in coach-state data-defects). "Exact" = equal to
+  Connect's per-second activity-details series, timestamp by timestamp, on 4 runs;
+  "likely" = no Connect series to compare, inferred from behaviour. The connector returns
+  the raw names until the upstream garmin_mcp release adds aliases:
 
-  | Raw field | Meaning | Confidence |
+  | Raw field (`record`) | Meaning | Confidence |
   |---|---|---|
-  | `unknown_144` | strap-only HR (gaps mark strap dropouts) | confirmed |
-  | `unknown_136` | wrist optical HR (equals `heart_rate` when no strap) | likely |
-  | 108 (`enhanced_respiration_rate`) | breathing rate × 100, br/min; strap only | FIT SDK |
-  | `unknown_143` | Body Battery (last − first = activity Body Battery impact) | confirmed |
-  | `unknown_137` | potential stamina % | confirmed |
-  | `unknown_138` | available stamina % (drops below potential on hard efforts) | confirmed |
-  | `unknown_90` | performance condition (Connect's chart, sample for sample) | confirmed |
+  | `unknown_144` | strap-only HR: equals `heart_rate` while the strap is on, stops when it drops, absent with no strap | likely |
+  | `unknown_136` | wrist optical HR (equals `heart_rate` on a no-strap run) | likely |
+  | 108 (`enhanced_respiration_rate`) | breathing rate × 100, br/min; strap only | exact |
+  | `unknown_143` | Body Battery (last − first = activity Body Battery impact) | exact |
+  | `unknown_137` | potential stamina % | exact |
+  | `unknown_138` | available stamina % (drops below potential on hard efforts) | exact |
+  | `unknown_90` | performance condition | exact |
+  | `unknown_140` | grade-adjusted speed, raw / 1000 = m/s | exact |
+  | `unknown_146` | step speed loss, raw / 10000 = m/s | exact |
+  | `unknown_147` | step speed loss %, raw / 100 | exact |
+
+  Other messages (FIT SDK profile, newer than the parser; or matched to Connect):
+  - `session`: 169/170/180 respiration avg/max/min (/100); 211 avg grade-adjusted speed
+    (/1000, m/s); 168 training load peak (/65536); 192 workout feel, 193 workout RPE;
+    196 metabolic calories. `device_info` 32 = battery level % (FIT SDK).
+  - Message type 140 (Firstbeat metrics, one per activity; not the record field above),
+    matched on 5 runs: 37 = training load (/65536, equals Connect's activity training
+    load); 4 / 20 = aerobic / anaerobic training effect (/10); 17 = final performance
+    condition; 3 + 38 = aerobic + anaerobic training load (likely: 3 equals 37 unless the
+    run has anaerobic load, so never read 3 as total load); 7 = candidate VO2max
+    (raw × 3.5 / 65536, ~0.3 below Connect's precise value: quote Connect's).
+  - Still unknown: `record` 100/101 (a second lat/long ~2 m off), 107, 134, 135, 145;
+    message types 22, 79, 113, 141, 147, 233, 288, 325-329, 394, 432, 499, 517, 534.
 
   On a different watch or firmware, re-check before relying on a mapping. A step in
   breathing rate at a steady stage is a ventilatory-threshold marker; flat breathing rate
   while HR climbs at a steady pace points to heat drift, not rising intensity.
 - **Strap test** (post-session, any run with a strap): count records where `heart_rate`
   equals `unknown_144`. Near 100% means the strap supplied HR throughout. Zero
-  `unknown_144` samples means wrist HR only.
+  `unknown_144` samples means wrist HR only. (Rests on the "likely" 144 mapping; say so
+  if the result matters.)
 - Running dynamics in `record` (ground contact time, ground contact balance % left,
   vertical ratio) need a strap or pod. Compare left/right balance only within one surface
   (treadmill vs outdoor differ).
