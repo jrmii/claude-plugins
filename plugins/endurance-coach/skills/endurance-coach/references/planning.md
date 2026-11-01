@@ -32,7 +32,8 @@ record notes/overrides but doesn't edit plan structure.
 - One `days:` entry per date: `sport`, `session`, caps/bands (`hr_cap`), `gate`,
   `fallback`, `then` (follow-on session), `optional`.
 - Volume arithmetic in the week file's `targets`, with the sum shown.
-- Push to Garmin only when the athlete approves (references/garmin-writes.md); record IDs
+- Push to Garmin without waiting for a go-ahead (SKILL.md rule 8; references/garmin-writes.md),
+  then report what was pushed; record IDs
   in `garmin.workouts`, picks in `peloton:` with `why`, `prescription`, `check_in`.
 - Commit with trailers: `Trigger`, `Actor`, `Model`, `Via` (coach-state README).
 

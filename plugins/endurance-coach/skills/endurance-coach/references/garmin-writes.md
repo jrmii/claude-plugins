@@ -1,7 +1,10 @@
 # Garmin writes: pointer workouts and side-effect checks
 
-Garmin writes happen only when the athlete asks (or has approved the plan being pushed) in
-the current conversation. Every write is followed by a read-back.
+Programming writes (workouts, schedule changes and swaps that implement the plan) need no
+go-ahead: the coach makes them and reports what changed (SKILL.md rule 8, athlete decision
+2026-10-26). Anything else (deleting recorded activities, nutrition settings, body data)
+happens only when the athlete asks in the current conversation. Every write is followed by
+a read-back.
 
 ## Workout naming
 
