@@ -29,6 +29,13 @@ record notes/overrides but doesn't edit plan structure.
 - Respect the season target, then adjust for readiness and constraints. Gates only hold or
   reduce; put a `gate:` + `fallback:` on key sessions (quality and long run).
 - Strength per references/strength.md and the placement position.
+- **A test must be able to fire its own rule.** Before placing a test or check inside a
+  session (a ramp, a nasal-breathing threshold check, a strap test), write its decision
+  rule ("if X happens, then Y") and confirm the session's caps, alerts, venue and duration
+  let X happen. A check whose signal appears above the session's HR cap can't run under
+  that cap: lift the cap for that segment, move the check to a session without one, or
+  drop it. (2026-10-26..28: a nasal threshold check was placed inside capped easy runs
+  three times, and the athlete caught it.)
 - One `days:` entry per date: `sport`, `session`, caps/bands (`hr_cap`), `gate`,
   `fallback`, `then` (follow-on session), `optional`.
 - Volume arithmetic in the week file's `targets`, with the sum shown.

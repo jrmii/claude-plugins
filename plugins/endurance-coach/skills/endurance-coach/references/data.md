@@ -132,6 +132,12 @@ record. Before saying a signal is "not available", check the FIT file.
 - Peloton `workouts_list`: interleaves Garmin-synced runs (`device_type garmin_connect`);
   `device_time_created_at` is local wall time; splits are pace-normalised.
 - Completed scheduled workouts disappear from `get_scheduled_workouts`.
+- **HealthEx: an empty or thin result isn't an absence.** Its records can be stale or
+  partly synced, and the authorization can expire (2026-10-26: expired auth, partial
+  sync). Before saying there's no lab, visit or medication, call `check_records_status`
+  and name its result; if it reports expired authorization or a sync in progress, say the
+  records can't be checked yet (the athlete re-authorizes) rather than reporting nothing
+  found.
 
 ### garmin_mcp 30324f7 (live on roac 2026-10-13)
 Don't compare values read before 2026-10-13 with values read after.
