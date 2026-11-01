@@ -72,6 +72,10 @@ no athlete data. Never answer from memory what a tool can tell you.
    (standing rules for that day's session type: fuel, venue, caps, strength rules; apply
    them though they name no date). `amended` = read `dated_positions` and `conflicts`
    before quoting the plan entry.
+   From v0.1.11 `get_today` is compact by default: notes and carry-over text are clipped
+   (`truncated: true`, `chars` = full length) and superseded notes are stubs. Before
+   relying on a clipped note (an open item, a number, a decision), read it in full with
+   `get_notes(date, recorded_at)`; never quote or ask from the clipped text alone.
 2. **Units:** `get_today` → `preferences`. Show *everything* in `distance_unit`, including
    distances read from Garmin or Peloton (convert metres/km; show the conversion once);
    races keep conventional names (5K, Half).
