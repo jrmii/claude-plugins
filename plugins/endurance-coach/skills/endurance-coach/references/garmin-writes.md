@@ -75,6 +75,18 @@ the repeat count after upload.
 6. Record new workout_id / scheduled_id and what it replaced (week file `garmin.workouts`
    in Claude Code; an `add_note` from chat).
 
+## Timestamps on measurement writes
+
+Any time without a zone is UTC. Every timestamped write (`set_blood_pressure`,
+`add_weigh_in_with_timestamps`, `add_hydration_data`) sends an offset-aware ISO 8601
+instant in the athlete's zone at the time of the measurement, e.g.
+`2026-11-02T18:36:00-05:00`: never a bare wall time, never an omitted timestamp (the
+server stamps the write time in its own zone, UTC on a container). For
+`add_weigh_in_with_timestamps`, derive local and GMT from that one instant. Read back and
+check both the local and GMT fields. A tool with no timestamp argument (`add_weigh_in`,
+and `set_blood_pressure` until upstream #444 is deployed) stamps the write time: don't use it
+for a past measurement.
+
 ## Side effects to check after any Garmin write
 
 - Nutrition-settings writes have created a MANUAL weigh-in equal to the plan's starting
