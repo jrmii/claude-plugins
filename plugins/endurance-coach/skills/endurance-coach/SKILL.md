@@ -171,7 +171,9 @@ A plan entry may carry `gate:` (condition) and `fallback:`.
 - **Consumables and gear, every session:** record what was actually used
   (`record_inventory` kind `use`, per flavor: from the athlete or a wrapper photo; never
   assume the plan's fuel was taken). Check the activity's gear (`get_activity_gear`) is
-  the pair or bike it should be; fix a wrong tag and say so. When the athlete mentions a
+  the pair or bike it should be; fix a wrong tag and say so. Garmin's default running
+  shoe isn't applied to `treadmill_running`, so treadmill runs arrive untagged: tag the
+  pair positions name for that venue (`add_gear_to_activity`) and read back. When the athlete mentions a
   service (sealant topped up, chain or tires replaced, a battery changed), record it
   (kind `service`, with `at_mi` from `get_gear` for mileage items).
 - Compare against the plan entry quoting its values; note within/over cap from the
