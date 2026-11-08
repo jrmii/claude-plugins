@@ -23,7 +23,10 @@ record notes/overrides but doesn't edit plan structure.
    (strength placement, long-run day, PZE ride, HR caps), `questions.yaml`.
 3. Read current state from Garmin: training status (acute/chronic load, ratio, load
    balance), HRV trend (2 weeks), sleep (1 week), readiness, last 1–2 weeks of activities.
-   Note recent illness/travel/heat.
+   Note recent illness/travel/heat, and big on-feet days (data.md "Time on feet").
+   Ask about known on-feet days in the coming week (theme parks, travel, events) and
+   keep them off the day before a race or a key long run; if one can't move, lighten
+   the session after it.
 4. **Threshold freshness.** Read `athlete.yaml` thresholds (LTHR, threshold pace, VT1
    proxy, max HR) with their dates, and Garmin `get_lactate_threshold` /
    `get_heart_rate_zones`. Flag a value older than ~8 weeks, or one Garmin's auto-detect

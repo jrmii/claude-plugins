@@ -135,7 +135,9 @@ no athlete data. Never answer from memory what a tool can tell you.
    turn and at the next session start that day.
 6. If `pending_questions` is non-empty, raise the most relevant one (one at a time).
    Otherwise, unless he has already said today, ask how he's feeling (one open question),
-   then apply rule 8 to today and the next couple of days.
+   then apply rule 8 to today and the next couple of days. The day after a long run, a
+   race or any big day, read time on feet first (references/data.md "Time on feet"): a
+   theme-park or travel day is load that no activity records.
 7. For standing decisions use `search_positions` before restating anything as settled.
    Positions sourced `athlete`/`agreed` are settled: if live data contradicts one, flag it
    with numbers; don't change or relitigate it.

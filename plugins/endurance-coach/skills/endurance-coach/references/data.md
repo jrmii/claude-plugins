@@ -67,6 +67,19 @@ before trusting a metric you haven't used recently. Summary of the traps that re
 - A low sleep score with a known logistics cause (late pickup, travel) is not a recovery
   signal: check notes.
 
+## Time on feet (walking outside recorded activities)
+Garmin activities miss walking days: a theme-park day after a long run is real load and
+explains a low readiness (2026-11-07: ~11.4 mi on foot outside the 18; readiness 28 and
+40.6 h recovery the next morning; the athlete had to point it out).
+- When: at session start the day after a long run, a race or any big day, and when
+  readiness or recovery time looks out of line with the recorded training.
+- How: `get_daily_steps` for the previous 1-2 days (total steps and distance) minus the
+  steps and distance of that day's recorded activities (`get_activities_by_date`). Show
+  the subtraction; call the result an estimate (the day total is step-based).
+- Read: more than ~15k steps outside recorded activities is a big on-feet day. Treat it as
+  load when reading readiness and setting the next 1-3 days (rule 8), and name it as the
+  likely cause of a low readiness rather than the training alone.
+
 ## FIT-only data (`get_activity_fit_messages`)
 The curated endpoints (`get_activity`, splits, HR zones) don't carry everything the devices
 record. Before saying a signal is "not available", check the FIT file.
