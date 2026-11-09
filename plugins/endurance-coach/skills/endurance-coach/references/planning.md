@@ -129,3 +129,20 @@ quote them, don't improvise. In order:
 4. Weather for remaining outdoor sessions.
 5. Answer: continue / adjust, with small, specific changes; don't restructure without a
    signal. State what you did and didn't check.
+
+## Race plan and retrospective
+- **Plan (T-14d, Claude Code):** `races/<race-id>-pace-plan.md` in coach-state (pace bands,
+  course and terrain sections, fuel slots, contingencies); the race-day `days:` entry quotes
+  its summary and names the file. From chat, read the whole plan with
+  `get_file("races/<race-id>-pace-plan.md")` (coach-state-mcp v0.1.15; races/ and
+  evidence/ are read-only from chat) before answering about pacing: the day entry carries
+  only the one-line summary.
+- **Retrospective (T+2d):** gather from Garmin (`get_activity`, splits, HR, weather, fuel
+  actually taken) and ask the athlete how it went (one question at a time). In chat, record
+  it with `add_note` on the **race date**, the text starting `RACE RETRO <race-id>:`
+  (result, splits against the plan's bands, what held and what broke, fuel and GI, what
+  changes next time). There is no race-file write tool, by design.
+- **Reconcile (Claude Code):** at the weekly reconcile, write each `RACE RETRO` note into
+  `races/<race-id>-retrospective.md` (citing the note's `recorded_at`), add the result to
+  `races.yaml`, and carry any lesson into positions or the next race's plan. The note stays
+  in the week file.
