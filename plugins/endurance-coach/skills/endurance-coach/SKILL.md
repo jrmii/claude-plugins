@@ -137,11 +137,15 @@ no athlete data. Never answer from memory what a tool can tell you.
    was answered.
    **News check:** before presenting anything that happened outside training as new (a
    race's status or cancellation, travel, illness, an email reply), search the last 48 h
-   of conversations (`recent_chats`, `conversation_search` on the event) and the week's
-   notes: he may have raised and settled it in another chat. Any chat that changes a race
+   of conversations (`recent_chats`, `conversation_search` on the event), the week's
+   notes, and for a race `get_races` (its `notes` carry status, replies and options):
+   he may have raised and settled it in another chat, and an email reply may be
+   recorded only there. Any chat that changes a race
    or the plan writes a coach-state note in the same turn, even outside a training
    conversation (2026-11-19: a fresh chat announced a cancellation he had settled hours
    earlier elsewhere).
+   A superseded note's stub carries `head` (its opening, v0.1.18): a correction may
+   replace only part of it, so read it with `get_notes` before relying on either note.
    A `session_start_checks` item with a time window (a weigh-in) that finds nothing yet
    is "not yet as of HH:MM", not an absence: say so, and read again before closing the
    turn and at the next session start that day.
