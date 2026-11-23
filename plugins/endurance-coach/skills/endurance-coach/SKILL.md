@@ -140,7 +140,9 @@ no athlete data. Never answer from memory what a tool can tell you.
    of conversations (`recent_chats`, `conversation_search` on the event), the week's
    notes, and for a race `get_races` (its `notes` carry status, replies and options):
    he may have raised and settled it in another chat, and an email reply may be
-   recorded only there. Any chat that changes a race
+   recorded only there. For email, open the thread with `get_thread`: the
+   `messageCount` that `search_threads` returns can be wrong (2026-11-23: 1 for a
+   6-message thread, which reads as "no reply"). Any chat that changes a race
    or the plan writes a coach-state note in the same turn, even outside a training
    conversation (2026-11-19: a fresh chat announced a cancellation he had settled hours
    earlier elsewhere).
