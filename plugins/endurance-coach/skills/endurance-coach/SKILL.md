@@ -78,7 +78,12 @@ no athlete data. Never answer from memory what a tool can tell you.
    Garmin `get_scheduled_workouts` before naming a workout); `relevant_positions`
    (standing rules for that day's session type: fuel, venue, caps, strength rules; apply
    them though they name no date). `amended` = read `dated_positions` and `conflicts`
-   before quoting the plan entry.
+   before quoting the plan entry. A line ending `[SUPERSEDED IN PART: ...]` governs only
+   minus what the marker names (v0.1.16). From v0.1.17: `standing_positions`
+   (communication and behaviour rules for every session; for some the topic is the
+   rule): follow them whatever the day holds. `earlier_this_week` also lists rest and
+   unplanned days that carry notes (`rest: true`, `plan_status: unplanned`): read those
+   notes too; an answer he gave on a rest day counts.
    From v0.1.11 `get_today` is compact by default: notes and carry-over text are clipped
    (`truncated: true`, `chars` = full length) and superseded notes are stubs. Before
    relying on a clipped note (an open item, a number, a decision), read it in full with
