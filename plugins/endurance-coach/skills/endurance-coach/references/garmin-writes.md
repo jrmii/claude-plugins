@@ -72,8 +72,11 @@ the repeat count after upload.
    workout, then call again with `confirm=true`.
 5. Read back the whole affected range: exactly one entry per planned session, no
    duplicates.
-6. Record new workout_id / scheduled_id and what it replaced (week file `garmin.workouts`
-   in Claude Code; an `add_note` from chat).
+6. Record new workout_id / scheduled_id and what it replaced: in Claude Code, the week
+   file's `garmin.workouts` (`replaces:`); from chat, `record_scheduled(..., replaces=<old
+   workout_id>)` (coach-state-mcp v0.1.16), so reads stop showing the old workout, plus
+   an `add_note` for the reason. Before v0.1.16, or if the call is refused, the note
+   alone (W47: 3 of 7 week-file IDs went stale that way).
 
 ## Timestamps on measurement writes
 

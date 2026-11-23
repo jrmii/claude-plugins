@@ -18,6 +18,13 @@ record notes/overrides but doesn't edit plan structure.
    `supersedes_note`, "CORRECTION", "withdrawn", "was wrong", and claims the athlete
    corrected in chat. Not every correction counts: a changed plan, or a fact the athlete
    updated, isn't a retraction. If the fix shipped (skill, MCP), cite that commit too.
+   **Promote and refresh traps:** a retraction the athlete caught, or one that repeats a
+   fact he has stated before, becomes a trap in `facts.yaml` (`when.mentions` with the
+   words the day's plan will contain). For every decision recorded this week that
+   replaces part of a rule, mark the old lines in positions.md (`superseded_by:` for a
+   whole entry, `superseded_in_part:` sub-bullet for part of one; append-only) and
+   rewrite any trap that still states the old rule (2026-11-23: the easy-run trap still
+   said "nasal breathing governs" four days after the athlete dropped it).
 2. Read: `season.yaml` (this week's target long run, weekly volume, phase intent),
    `constraints.yaml` (travel, events, lodging, family), `races.yaml`, positions
    (strength placement, long-run day, PZE ride, HR caps), `questions.yaml`.
@@ -49,6 +56,13 @@ record notes/overrides but doesn't edit plan structure.
 - Respect the season target, then adjust for readiness and constraints. Gates only hold or
   reduce; put a `gate:` + `fallback:` on key sessions (quality and long run).
 - Strength per references/strength.md and the placement position.
+- **Long-run logistics are settled practice.** Before planning route, refill stop,
+  fluid, carry or fuel for a long run, read the last long run on the same route (its
+  week-file notes and actuals) and the long-run positions, and repeat what worked. Change
+  something only with a reason (heat, a new distance, a new fuel count) and say what
+  changed. Don't re-derive the plan. (2026-11-21: four corrections in one evening came
+  from re-deriving a fluid plan, a refill mile, a carry count and a gel order that were
+  already settled.)
 - **Long runs default to a plain Run**, not a structured workout: Garmin holds the
   watch's eat/drink alerts while a structured workout runs, so fuel reminders don't fire.
   If a long run needs structure (segments, a test), build in explicit fuel steps at the

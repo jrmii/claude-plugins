@@ -130,6 +130,13 @@ no athlete data. Never answer from memory what a tool can tell you.
    (`add_note` with `supersedes`) and don't ask. When writing a note, record an answer that
    arrives in the same conversation; never leave an "assumed / not confirmed" line that
    was answered.
+   **News check:** before presenting anything that happened outside training as new (a
+   race's status or cancellation, travel, illness, an email reply), search the last 48 h
+   of conversations (`recent_chats`, `conversation_search` on the event) and the week's
+   notes: he may have raised and settled it in another chat. Any chat that changes a race
+   or the plan writes a coach-state note in the same turn, even outside a training
+   conversation (2026-11-19: a fresh chat announced a cancellation he had settled hours
+   earlier elsewhere).
    A `session_start_checks` item with a time window (a weigh-in) that finds nothing yet
    is "not yet as of HH:MM", not an absence: say so, and read again before closing the
    turn and at the next session start that day.
