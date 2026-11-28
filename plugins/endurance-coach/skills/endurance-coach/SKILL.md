@@ -106,10 +106,9 @@ no athlete data. Never answer from memory what a tool can tell you.
    them though they name no date). `amended` = read `dated_positions` and `conflicts`
    before quoting the plan entry. A line carrying `[SUPERSEDED IN PART: ...]` governs only
    minus what the marker names (v0.1.16); compact reads (v0.1.22+) put a bare
-   `[SUPERSEDED IN PART]` at the front, may clip the named part off the end, and from
-   v0.1.24 count such lines (`superseded_in_part_lines`) instead of repeating them when a
-   governing line exists: `search_positions(topic)` has the full text. Standing
-   positions give their latest line (`more_lines` counts the rest). From v0.1.17: `standing_positions`
+   `[SUPERSEDED IN PART]` at the front and clip lines (v0.1.24: 140 for a marked line,
+   180 otherwise): read the full line with `search_positions(topic)` before relying on
+   a clipped or marked one; the still-valid part of a marked line governs. From v0.1.17: `standing_positions`
    (communication and behaviour rules for every session; for some the topic is the
    rule): follow them whatever the day holds. `earlier_this_week` also lists rest and
    unplanned days that carry notes (`rest: true`, `plan_status: unplanned`): read those
