@@ -52,5 +52,8 @@ Against the tool output itself (not your memory of it): the value, its unit (con
 >    two endpoints standing in for a trend, a manual or post-run weigh-in.
 > 4. Verdict per claim: PASS, FAIL (why, plus the corrected value if derivable) or
 >    UNSUPPORTED (no data given for it).
+> Also flag any decision in the draft that depends on a question the athlete hasn't
+> answered yet (how he feels, a sick-day sign): it must wait for the answer unless it is
+> a hard stop (NWS alert in window, written safety stop, injury report).
 > Also flag any interpretive word ("plateau", "trend", "stalled") the data doesn't
 > carry, and any claim in the draft missing from the list.
