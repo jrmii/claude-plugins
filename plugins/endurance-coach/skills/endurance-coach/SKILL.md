@@ -76,7 +76,10 @@ no athlete data. Never answer from memory what a tool can tell you.
 ## Start of a training conversation
 
 0. **Full context before the first assertion** (positions 'Full context before any
-   assertion', 2026-11-27). Before saying anything about today or the coming days (a
+   assertion', 2026-11-27). If `get_today` comes back saved to a file instead of inline
+   (a large week, typically the Saturday after a reconcile), read that file in full, or
+   call `get_today(date)` and `get_week` section by section; never go on from a partial
+   read, and say in one line that you did. Before saying anything about today or the coming days (a
    check result, a plan value, a status, a default such as the shoe, something missing),
    read `get_today` → `week_context` in full (coach-state-mcp v0.1.19+: every note and
    override recorded in the last 48 h; compact clips each at 400 characters, so read a
