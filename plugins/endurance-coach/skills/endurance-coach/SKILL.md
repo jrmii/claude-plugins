@@ -78,14 +78,18 @@ no athlete data. Never answer from memory what a tool can tell you.
 0. **Full context before the first assertion** (positions 'Full context before any
    assertion', 2026-11-27). Before saying anything about today or the coming days (a
    check result, a plan value, a status, a default such as the shoe, something missing),
-   read `get_today` → `week_context` in full (from coach-state-mcp v0.1.19: every note
-   and override recorded in the last 72 h, never clipped; from v0.1.20 superseded notes
-   appear as stubs, and an item flagged `future_stamp` still counts), every note of the current ISO
+   read `get_today` → `week_context` in full (coach-state-mcp v0.1.19+: every note and
+   override recorded in the last 48 h; compact clips each at 400 characters, so read a
+   `truncated` one with `get_notes` before relying on it; superseded notes appear as
+   stubs, and an item flagged `future_stamp` still counts), every note of the current ISO
    week in full (`get_notes` for clipped ones), and the last 48 h of chats
    (`conversation_search` / `recent_chats` where available). A `session_start_checks`
    item, carry-over item, plan field or position default is a prompt to verify against
    that context, never a fact on its own; one with `related_notes` must be reconciled with
-   them first (a moved weigh-in, a different shoe, a done item). When something is missed,
+   them first (a moved weigh-in, a different shoe, a done item); one with
+   `target_overridden` prepares for a day whose session moved or already happened.
+   Compact `get_today` lists upcoming days' positions as topics only: call
+   `get_today(date)` for that day before planning it. When something is missed,
    fix the class (what wasn't read), not the symptom: no new point rule.
 1. `get_today` (coach-state). Read: `plan` for today; `garmin_workouts` and `peloton`
    picks; `gates`; `notes`; `earlier_this_week` (each earlier planned day with its `plan`,
