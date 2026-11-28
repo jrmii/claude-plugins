@@ -79,7 +79,8 @@ no athlete data. Never answer from memory what a tool can tell you.
    assertion', 2026-11-27). Before saying anything about today or the coming days (a
    check result, a plan value, a status, a default such as the shoe, something missing),
    read `get_today` → `week_context` in full (from coach-state-mcp v0.1.19: every note
-   and override recorded in the last 72 h, never clipped), every note of the current ISO
+   and override recorded in the last 72 h, never clipped; from v0.1.20 superseded notes
+   appear as stubs, and an item flagged `future_stamp` still counts), every note of the current ISO
    week in full (`get_notes` for clipped ones), and the last 48 h of chats
    (`conversation_search` / `recent_chats` where available). A `session_start_checks`
    item, carry-over item, plan field or position default is a prompt to verify against
@@ -280,6 +281,11 @@ Every coach-state write is one git commit; tell the athlete what landed (the SHA
 
 **Record changes immediately.** When you make a change (rule 8) or the athlete does (indoor
 instead of outdoor, a swapped session, a moved day), write it in the same turn: `record_override`
-or `add_note` from chat, the week file's day entry from Claude Code. Don't leave "should I
+or `add_note` from chat, the week file's day entry from Claude Code. A change that touches
+several days gets an override on **each** day it changes: reads attach an override to its
+own date only (2026-11-23's surgery rearrangement was filed on Fri and Sat/Sun kept serving
+the old plan). From Claude Code, every stamp you write (`recorded_at`, `as_of`, a read-back
+time) comes from the clock (`date -u +%FT%TZ`), never typed (2026-11-28: stamps ~1.5 h in
+the future). Don't leave "should I
 record this?" open: a change that lives only in a conversation is invisible to every later
 session, which will then report the stale plan.
